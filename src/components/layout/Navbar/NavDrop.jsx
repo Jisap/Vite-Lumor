@@ -31,12 +31,12 @@ const NavDrop = ({ item }) => {
       <div className='flex items-center gap-1 cursor-pointer' onClick={toggleDropdown}>
         <NavLink
           to={item.path}
-          className="text-sm md:text-[16px] font-medium text-white nav-link"
+          className="text-sm md:text-[16px] font-medium text-white group"
           onClick={(e) => {
             if (item.submenu) e.preventDefault()
           }}
         >
-          {item.name}
+          <span className='nav-link'>{item.name}</span>
         </NavLink>
 
         <ChevronDown
@@ -56,9 +56,9 @@ const NavDrop = ({ item }) => {
           <li key={index}>
             <NavLink
               to={sub.path}
-              className="block px-4 transition-all nav-link w-fit duration-300 text-sm"
+              className="block px-4 transition-all duration-300 text-sm group"
             >
-              {sub.name}
+              <span className='nav-link'>{sub.name}</span>
             </NavLink>
           </li>
         ))}

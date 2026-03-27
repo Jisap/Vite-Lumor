@@ -76,3 +76,33 @@ h6 {
         @apply text-[14px] leading-4.5 text-heading font-semibold uppercase tracking-[2px] opacity-90 mb-[1.4em] inline-block;
     }
 }
+
+.nav-link {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s ease;
+    z-index: 1;
+}
+
+.nav-link:hover::after,
+.group:hover .nav-link::after {
+    width: 100% !important;
+}
+
+.nav-dropdown-menu li {
+    transition: all .3s ease-in-out;
+}
+
+.nav-dropdown-menu li:hover {
+    transform: translateX(5px);
+}

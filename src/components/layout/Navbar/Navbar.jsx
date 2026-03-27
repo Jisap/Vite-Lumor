@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Logo from './Logo'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import NavDrop from './NavDrop';
 import Navmenu from './Navmenu';
+import { ShoppingBag, User } from 'lucide-react';
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -70,6 +71,17 @@ const Navbar = () => {
                   <Navmenu key={index} name={item.name} path={item.path} />
                 )
               ))}
+            </div>
+
+            {/* Nav Icons */}
+            <div className='nav-icons flex items-center gap-3'>
+              <button onClick={() => setOpenAuth(false)} className='user cursor-pointer'>
+                <User size={24} className='text-white cursor-pointer' />
+              </button>
+
+              <Link to="/" className="relative">
+                <ShoppingBag size={24} className="text-white cursor-pointer" />
+              </Link>
             </div>
           </div>
         </div>
