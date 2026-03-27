@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&family=Unbounded:wght@200..900&display=swap');
+
+@import "tailwindcss";
+
+@font-face {
+    font-family: "impact01";
+    src: url(/fonts/IMPACT.TTF);
+}
+
+.impact,
+.impact span {
+    font-family: "impact01", sans-serif !important;
+}
+
+@theme {
+    --color-primary: #051728;
+    --color-light-yellow: #f4f3e6;
+    --color-heading: #1e2831;
+    --color-paragraph: #656565;
+    --color-muted: #858D97;
+    --color-footer: #9aa0a8;
+    --color-coffee: #ae9775;
+    --color-coffee-light: #B19777;
+}
+
+body {
+    font-family: "Sora", "Montserrat", sans-serif;
+}
+
+.montserrat {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+::-webkit-scrollbar {
+    display: none;
+    -webkit-scrollbar: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: capitalize !important;
+}
+
+@utility centered-row {
+    @apply flex items-center;
+}
+
+@utility centered-start {
+    @apply flex items-center;
+}
+
+@layer components {
+    .section-container {
+        @apply flex justify-between items-start w-full lg:flex-row flex-col;
+    }
+
+    .heading-1 {
+        @apply text-3xl text-heading sm:text-4xl lg:text-5xl font-semibold leading-tight mb-12;
+    }
+
+    .pera-text {
+        @apply text-paragraph mb-10;
+    }
+
+    .section-image {
+        @apply w-full h-full object-cover
+    }
+
+    .title-span {
+        @apply text-[14px] leading-4.5 text-heading font-semibold uppercase tracking-[2px] opacity-90 mb-[1.4em] inline-block;
+    }
+}
