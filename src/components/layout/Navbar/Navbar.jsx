@@ -5,6 +5,7 @@ import NavDrop from './NavDrop';
 import Navmenu from './Navmenu';
 import { ShoppingBag, TextAlignJustify, User } from 'lucide-react';
 import MobileMenu from './MobileMenu';
+import AuthModal from '../../ui/Modal/AuthModal';
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -86,7 +87,7 @@ const Navbar = () => {
 
             {/* Nav Icons */}
             <div className='nav-icons flex items-center gap-3'>
-              <button onClick={() => setOpenAuth(false)} className='user cursor-pointer'>
+              <button onClick={() => setOpenAuth(true)} className='user cursor-pointer'>
                 <User size={24} className='text-white cursor-pointer' />
               </button>
 
@@ -114,6 +115,11 @@ const Navbar = () => {
         setMenuOpen={setMenuOpen}
         navLinks={navLinks}
         className="lg:block hidden"
+      />
+
+      <AuthModal
+        isOpen={openAuth}
+        onClose={() => setOpenAuth(false)}
       />
     </>
   )
