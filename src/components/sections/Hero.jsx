@@ -105,12 +105,12 @@ const Hero = () => {
           </SwiperSlide>
         </Swiper>
 
-        <button className="hero-prev z-10 absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-xl p-4 rounded-full text-white border border-white/20 hover:bg-coffee hover:border-coffee transition-all duration-300 group">
-          <ChevronLeft size={24} className="group-hover:-translate-x-1 transition-transform" />
+        <button className="hero-prev hidden md:flex z-10 absolute left-8 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center bg-transparent text-white/50 border border-white/10 hover:text-white hover:border-white transition-all duration-500 rounded-full group">
+          <ChevronLeft size={20} className="group-hover:-translate-x-0.5 transition-transform" />
         </button>
 
-        <button className="hero-next z-10 absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-xl p-4 rounded-full text-white border border-white/20 hover:bg-coffee hover:border-coffee transition-all duration-300 group">
-          <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
+        <button className="hero-next hidden md:flex z-10 absolute right-8 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center bg-transparent text-white/50 border border-white/10 hover:text-white hover:border-white transition-all duration-500 rounded-full group">
+          <ChevronRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
         </button>
 
         <ul className="social-icons text-white absolute right-14 bottom-8 space-x-5 flex z-1">
