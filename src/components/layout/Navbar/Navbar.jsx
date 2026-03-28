@@ -4,6 +4,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import NavDrop from './NavDrop';
 import Navmenu from './Navmenu';
 import { ShoppingBag, TextAlignJustify, User } from 'lucide-react';
+import MobileMenu from './MobileMenu';
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -91,18 +92,29 @@ const Navbar = () => {
 
               <Link to="/cart" className="relative">
                 <ShoppingBag size={24} className="text-white cursor-pointer" />
-                <span className='absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full'>
+                <span className='card-count'>
                   0
                 </span>
               </Link>
 
-              <button className='relative ms-2 lg:hidden block' onClick={() => setMenuOpen(true)}>
+              <button
+                className='relative ms-2 lg:hidden block'
+                onClick={() => setMenuOpen(true)}
+              >
                 <TextAlignJustify size={24} className='text-white cursor-pointer' />
               </button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      <MobileMenu
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+        navLinks={navLinks}
+        className="lg:block hidden"
+      />
     </>
   )
 }

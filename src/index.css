@@ -106,3 +106,24 @@ h6 {
 .nav-dropdown-menu li:hover {
     transform: translateX(5px);
 }
+
+.card-count {
+    font-size: 10px;
+    font-weight: 500;
+    min-width: 15px;
+    min-height: 15px;
+    text-align: center;
+    letter-spacing: .3px;
+    padding: 0 2px;
+    top: auto;
+    bottom: -3px;
+    right: -6px;
+    --webkit-transform: none;
+    --ms-transform: none;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 1;
+    color: #fff;
+    background-color: #00a4b2;
+    ;
+}
