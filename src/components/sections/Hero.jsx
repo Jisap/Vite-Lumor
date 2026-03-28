@@ -9,7 +9,8 @@ import slide1 from "/images/Index/Hero/main-slider-01.jpg"
 import slide2 from "/images/Index/Hero/main-slider-02.jpg"
 import slide3 from "/images/Index/Hero/main-slider-03.jpg"
 import MainBtn from "../ui/Buttons/MainBtn"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Dribbble, Facebook, Instagram, Twitter } from "lucide-react"
+
 
 
 
@@ -108,6 +109,29 @@ const Hero = () => {
         <button className="hero-next z-10 absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-xl p-4 rounded-full text-white border border-white/20 hover:bg-coffee hover:border-coffee transition-all duration-300 group">
           <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
         </button>
+
+        <ul className="social-icons text-white absolute right-14 bottom-8 space-x-5 flex z-1">
+          <li>
+            <a href="https://www.facebook.com/">
+              <Facebook className="social-icon" />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/">
+              <Instagram className="social-icon" />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.twitter.com/">
+              <Twitter className="social-icon" />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.dribbble.com/">
+              <Dribbble className="social-icon" />
+            </a>
+          </li>
+        </ul>
       </div>
     </>
   )
