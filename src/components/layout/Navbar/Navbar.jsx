@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Logo from './Logo'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import NavDrop from './NavDrop';
 import Navmenu from './Navmenu';
-import { ShoppingBag, User } from 'lucide-react';
+import { ShoppingBag, TextAlignJustify, User } from 'lucide-react';
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -33,7 +33,12 @@ const navLinks = [
 
 const Navbar = () => {
 
-  const [scroll, setScroll] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [openAuth, setOpenAuth] = useState(false);
+  const [scroll, setScroll] = useState(false);
+
+  const location = useLocation();
+  const is404 = location.pathname === '/page404';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,7 +57,12 @@ const Navbar = () => {
       <div
         className={`
           w-full z-10 fixed top-0 left-0 transition-all duration-300 bg-black! 
-          ${scroll ? 'bg-black shadow-lg' : 'bg-transparent'}  
+          ${is404
+            ? "bg-black text-white"
+            : scroll
+              ? 'bg-black shadow-lg'
+              : 'bg-transparent'
+          }  
         `}
       >
         <div className='container mx-auto flex justify-between items-center h-22 px-4'>
@@ -79,9 +89,16 @@ const Navbar = () => {
                 <User size={24} className='text-white cursor-pointer' />
               </button>
 
-              <Link to="/" className="relative">
+              <Link to="/cart" className="relative">
                 <ShoppingBag size={24} className="text-white cursor-pointer" />
+                <span className='absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full'>
+                  0
+                </span>
               </Link>
+
+              <button className='relative ms-2 lg:hidden block' onClick={() => setMenuOpen(true)}>
+                <TextAlignJustify size={24} className='text-white cursor-pointer' />
+              </button>
             </div>
           </div>
         </div>
