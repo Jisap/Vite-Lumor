@@ -126,5 +126,38 @@ h6 {
     z-index: 1;
     color: #fff;
     background-color: #00a4b2;
-    ;
+}
+
+.swiper-pagination-bullet {
+    background: white !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--color-light-yellow) !important;
+}
+
+.social-icons::after {
+    content: "";
+    position: absolute;
+    left: -100px;
+    top: 12px;
+    height: 1px;
+    width: 80px;
+    background-color: rgb(151, 146, 146);
+}
+
+.social-icons li {
+    border-radius: 5px;
+}
+
+.social-icons li a {
+    color: rgb(151, 146, 146)
+}
+
+.social-icon {
+    transition: transform 0.4s ease;
+}
+
+.social-icons li:hover .social-icon {
+    transform: rotateY(360deg)
 }

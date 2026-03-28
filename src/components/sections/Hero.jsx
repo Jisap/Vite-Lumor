@@ -26,6 +26,9 @@ const Hero = () => {
             nextEl: ".hero-next",
             prevEl: ".hero-prev",
           }}
+          pagination={{
+            clickable: true,
+          }}
           loop={true}
           className="heroSwiper px-4 py-[8%]"
         >
