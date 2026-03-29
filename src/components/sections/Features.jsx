@@ -9,7 +9,7 @@ import featureImage5 from "/images/Index/Features/feature-image-05.jpg"
 import featureImage6 from "/images/Index/Features/feature-image-06.jpg"
 import featureImage7 from "/images/Index/Features/feature-image-07.jpg"
 
-import { BedDouble, ChefHat } from 'lucide-react'
+import { Bath, BedDouble, ChefHat, Flame, Lightbulb, Palette, Sofa, Square } from 'lucide-react'
 
 
 
@@ -46,14 +46,50 @@ const Features = () => {
           <FeatureCard
             image={featureImage1}
             icon={BedDouble}
-            title="BeRooms"
+            title="BedRooms"
             description="Comfortable and elegant bedroom designs that create a peaceful and relaxing environment for rest and rejuvenation.."
           />
           <FeatureCard
             image={featureImage2}
             icon={ChefHat}
-            title="BeRooms"
+            title="Kitchens"
             description="Modern kitchens designed for functionality and style, combining smart layouts with beautiful finishes."
+          />
+          <FeatureCard
+            image={featureImage3}
+            icon={Lightbulb}
+            title="Lighting"
+            description="Creative lighting solutions that enhance mood, highlight interiors, and bring warmth to every space."
+          />
+          <FeatureCard
+            image={featureImage4}
+            icon={Square}
+            title="Windows"
+            description="Stylish window designs that maximize natural light while improving ventilation and aesthetic appeal."
+          />
+          <FeatureCard
+            image={featureImage5}
+            icon={Bath}
+            title="Bathrooms"
+            description="Luxury bathroom interiors that blend comfort, elegance, and modern functionality for a refreshing experience."
+          />
+          <FeatureCard
+            image={featureImage6}
+            icon={Palette}
+            title="Decoration"
+            description="Beautiful decorative elements that add personality, charm, and artistic expression to your living spaces."
+          />
+          <FeatureCard
+            image={featureImage7}
+            icon={Flame}
+            title="Fireplaces"
+            description="Elegant fireplaces designed to create a warm and inviting atmosphere in modern homes."
+          />
+          <FeatureCard
+            image={featureImage1}
+            icon={Sofa}
+            title="Living Rooms"
+            description="Sophisticated living room interiors crafted for comfort, style, and memorable moments with family and guests."
           />
         </div>
       </div>

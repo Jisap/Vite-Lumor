@@ -18,7 +18,7 @@ const About = () => {
         </div>
       </div>
 
-      <div className="about-content w-full lg:w-1/2">
+      <div className="about-content w-full lg:w-1/2 px-4">
         <span className="title-span">About Us</span>
 
         <h2 className="heading-1 mb-5">Creative Solutions
