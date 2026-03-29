@@ -4,7 +4,7 @@ import Navbar from './components/layout/Navbar/Navbar'
 
 import Footer from './components/layout/Footer/Footer'
 import Home from './pages/Home'
-import About from './components/sections/about'
+
 
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
           <div className='min-h-screen overflow-clip'>
             <Routes>
               <Route path='/' element={<Home />} />
-              <Route path='/about' element={<About />} />
+
             </Routes>
           </div>
           <Footer />

@@ -8,7 +8,7 @@ const About = () => {
 
   return (
     <section id="about" className='about container py-[8%] mx-auto section-container gap-14 min-h-[60vh] flex flex-col lg:flex-row items-center'>
-      <div className='about-image rounded-sm w-full lg:w-1/2 max-w-full lg:max-w-125 mx-auto relative overflow-hidden aspect-square lg:aspect-auto lg:h-[500px]'>
+      <div className='about-image rounded-sm w-full lg:w-1/2 max-w-full lg:max-w-125 mx-auto relative overflow-hidden h-[400px] md:h-[500px] lg:h-[600px]'>
         <div className='about-bg-video absolute inset-0 -z-10 h-full w-full'>
           <img
             src={aboutMainImg}
