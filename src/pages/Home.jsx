@@ -1,8 +1,7 @@
 import React from 'react'
 import Hero from '../components/sections/Hero'
-import About from '../components/sections/about'
+import About from '../components/sections/About'
 import Features from '../components/sections/Features'
-
 
 const Home = () => {
   return (

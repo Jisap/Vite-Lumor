@@ -11,8 +11,33 @@ import slide3 from "/images/Index/Hero/main-slider-03.jpg"
 import MainBtn from "../ui/Buttons/MainBtn"
 import { ChevronLeft, ChevronRight, Dribbble, Facebook, Instagram, Twitter } from "lucide-react"
 
-
-
+const heroSlides = [
+  {
+    image: slide1,
+    titleMain: "Transform Your",
+    titleAccent: "Spaces",
+    description: "Bring your vision to life with sophisticated interiors that combine style, comfort, and functionality, creating a home that truly reflects your personality and taste.",
+    btnText: "Explore Designs",
+    btnPath: "/about"
+  },
+  {
+    image: slide2,
+    titleMain: "Inspiring Your",
+    titleAccent: "Living",
+    description: "Elevate your daily life with inspired designs that balance beauty and practicality, transforming ordinary spaces into extraordinary experiences that energize, relax, and captivate.",
+    btnText: "View Projects",
+    btnPath: "/about",
+    btnClass: "w-45!"
+  },
+  {
+    image: slide3,
+    titleMain: "Elegance Every",
+    titleAccent: "Detail",
+    description: "Experience luxury in every corner, where meticulous attention to detail, refined materials, and thoughtful design merge to craft interiors that impress and endure beautifully.",
+    btnText: "Get In Touch",
+    btnPath: "/contact"
+  }
+];
 
 const Hero = () => {
   return (
@@ -32,77 +57,30 @@ const Hero = () => {
           loop={true}
           className="heroSwiper px-4 py-[8%]"
         >
-          <SwiperSlide>
-            <div
-              className="px-[4%] md:px-[8%] xl:px-[12%] py-[8%] xl:py-[12%] min-h-screen w-full flex flex-col justify-center items-center bg-no-repeat bg-cover bg-center"
-              style={{ backgroundImage: `url(${slide1})` }}
-            >
-              <div className="hero-content text-white text-center">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold pb-5">
-                  Transform Your <span className="block text-coffee w-fit mx-auto">Spaces</span>
-                </h1>
+          {heroSlides.map((slide, index) => (
+            <SwiperSlide key={index}>
+              <div
+                className="px-[4%] md:px-[8%] xl:px-[12%] py-[8%] xl:py-[12%] min-h-screen w-full flex flex-col justify-center items-center bg-no-repeat bg-cover bg-center"
+                style={{ backgroundImage: `url(${slide.image})` }}
+              >
+                <div className="hero-content text-white text-center">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold pb-5">
+                    {slide.titleMain} <span className="block text-coffee w-fit mx-auto">{slide.titleAccent}</span>
+                  </h1>
 
-                <p className="max-w-4xl mx-auto pb-14 lg:pb-18 text-gray-50 font-light text-md lg:text-lg">
-                  Bring your vision to life with sophisticated interiors that combine style, comfort, and functionality, creating a home that truly reflects your personality and taste.
+                  <p className="max-w-4xl mx-auto pb-14 lg:pb-18 text-gray-50 font-light text-md lg:text-lg">
+                    {slide.description}
+                  </p>
 
-                </p>
-
-                <MainBtn
-                  text={"Explore Designs"}
-                  path="/about"
-                />
+                  <MainBtn
+                    text={slide.btnText}
+                    path={slide.btnPath}
+                    className={slide.btnClass}
+                  />
+                </div>
               </div>
-
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div
-              className="px-[4%] md:px-[8%] xl:px-[12%] py-[8%] xl:py-[12%] min-h-screen w-full flex flex-col justify-center items-center bg-no-repeat bg-cover bg-center"
-              style={{ backgroundImage: `url(${slide2})` }}
-            >
-              <div className="hero-content text-white text-center">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold pb-5">
-                  Inspiring Your <span className="block text-coffee w-fit mx-auto">Living</span>
-                </h1>
-
-                <p className="max-w-4xl mx-auto pb-14 lg:pb-18 text-gray-50 font-light text-md lg:text-lg">
-                  Elevate your daily life with inspired designs that balance beauty and practicality, transforming ordinary spaces into extraordinary experiences that energize, relax, and captivate.
-
-                </p>
-
-                <MainBtn
-                  text={"View Projects"}
-                  path="/about"
-                  className="w-45!"
-                />
-              </div>
-
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div
-              className="px-[4%] md:px-[8%] xl:px-[12%] py-[8%] xl:py-[12%] min-h-screen w-full flex flex-col justify-center items-center bg-no-repeat bg-cover bg-center"
-              style={{ backgroundImage: `url(${slide3})` }}
-            >
-              <div className="hero-content text-white text-center">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold pb-5">
-                  Elegance Every <span className="block text-coffee w-fit mx-auto">Detail</span>
-                </h1>
-
-                <p className="max-w-4xl mx-auto pb-14 lg:pb-18 text-gray-50 font-light text-md lg:text-lg">
-                  Experience luxury in every corner, where meticulous attention to detail, refined materials, and thoughtful design merge to craft interiors that impress and endure beautifully.
-                </p>
-
-                <MainBtn
-                  text={"Get In Touch"}
-                  path="/contact"
-                />
-              </div>
-
-            </div>
-          </SwiperSlide>
+            </SwiperSlide>
+          ))}
         </Swiper>
 
         <button className="hero-prev hidden md:flex z-10 absolute left-8 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center bg-transparent text-white/50 border border-white/10 hover:text-white hover:border-white transition-all duration-500 rounded-full group">
@@ -114,26 +92,18 @@ const Hero = () => {
         </button>
 
         <ul className="social-icons text-white absolute right-14 bottom-8 space-x-5 flex z-1">
-          <li>
-            <a href="https://www.facebook.com/">
-              <Facebook className="social-icon" />
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/">
-              <Instagram className="social-icon" />
-            </a>
-          </li>
-          <li>
-            <a href="https://www.twitter.com/">
-              <Twitter className="social-icon" />
-            </a>
-          </li>
-          <li>
-            <a href="https://www.dribbble.com/">
-              <Dribbble className="social-icon" />
-            </a>
-          </li>
+          {[
+            { icon: Facebook, url: "https://www.facebook.com/" },
+            { icon: Instagram, url: "https://www.instagram.com/" },
+            { icon: Twitter, url: "https://www.twitter.com/" },
+            { icon: Dribbble, url: "https://www.dribbble.com/" }
+          ].map((social, idx) => (
+            <li key={idx}>
+              <a href={social.url}>
+                <social.icon className="social-icon" />
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </>
