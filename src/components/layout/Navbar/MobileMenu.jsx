@@ -24,16 +24,16 @@ const MobileMenu = ({ menuOpen, setMenuOpen, navLinks }) => {
         `}
       >
         <div className="absolute inset-0 bg-radial-at-t from-coffee/10 via-transparent to-transparent pointer-events-none" />
-        
+
         <div className="relative h-screen flex flex-col px-[6%] md:px-[8%]">
           {/* Header */}
           <div className="flex justify-between items-center py-6 border-b border-gray-50/10 shrink-0">
             <Logo />
             <button
               onClick={() => setMenuOpen(false)}
-              className="group flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white transition-all duration-300 hover:bg-white/10"
+              className="group flex items-center gap-2 px-2 py-2 rounded-full bg-white/5 border border-white/10 text-white transition-all duration-300 hover:bg-white/10"
             >
-              <span className="text-sm font-medium uppercase tracking-widest">Close</span>
+              {/* <span className="text-sm font-medium uppercase tracking-widest">Close</span> */}
               <X size={20} className="transition-transform duration-500 group-hover:rotate-90" />
             </button>
           </div>
@@ -85,7 +85,7 @@ const MobileMenu = ({ menuOpen, setMenuOpen, navLinks }) => {
                           >
                             <span className={`w-1.5 h-1.5 rounded-full transition-all duration-300 
                               ${activeMenu === index ? "scale-100 opacity-100" : "scale-0 opacity-0"}
-                              bg-coffee shadow-[0_0_8px_rgba(174,151,117,0.6)]`} 
+                              bg-coffee shadow-[0_0_8px_rgba(174,151,117,0.6)]`}
                             />
                             <span className="text-lg font-light tracking-wide">{sub.name}</span>
                           </NavLink>
@@ -107,8 +107,8 @@ const MobileMenu = ({ menuOpen, setMenuOpen, navLinks }) => {
                 { Icon: Dribbble, color: "from-coffee to-[#B19777]" }
               ].map((social, i) => (
                 <li key={i}>
-                  <Link 
-                    to="/" 
+                  <Link
+                    to="/"
                     className={`p-3 rounded-full bg-linear-to-tr ${social.color} transition-all duration-500 hover:scale-110 hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] inline-block`}
                   >
                     <social.Icon className="text-white" size={18} />
