@@ -96,16 +96,22 @@ const About = () => {
 
         {/* Three small images — cascade offset: mt-0 / mt-6 / mt-12 */}
         <div className="grid grid-cols-3 gap-4 xl:gap-6 mb-10 items-start">
-          <div ref={img1Ref} className="mt-0 h-36 overflow-hidden rounded-sm hover:translate-y-[-6px] transition-transform duration-300 w-full">
-            <img src={aboutImg1} alt="Interior design sample 1" className="section-image" />
+          <div ref={img1Ref} className="mt-0 w-full">
+            <div className="h-36 overflow-hidden rounded-sm hover:translate-y-[-6px] transition-transform duration-300">
+              <img src={aboutImg1} alt="Interior design sample 1" className="section-image" />
+            </div>
           </div>
 
-          <div ref={img2Ref} className="mt-6 h-36 overflow-hidden rounded-sm hover:translate-y-[-6px] transition-transform duration-300 w-full">
-            <img src={aboutImg2} alt="Interior design sample 2" className="section-image" />
+          <div ref={img2Ref} className="mt-6 w-full">
+            <div className="h-36 overflow-hidden rounded-sm hover:translate-y-[-6px] transition-transform duration-300">
+              <img src={aboutImg2} alt="Interior design sample 2" className="section-image" />
+            </div>
           </div>
 
-          <div ref={img3Ref} className="mt-12 h-36 overflow-hidden rounded-sm hover:translate-y-[-6px] transition-transform duration-300 w-full">
-            <img src={aboutImg3} alt="Interior design sample 3" className="section-image" />
+          <div ref={img3Ref} className="mt-12 w-full">
+            <div className="h-36 overflow-hidden rounded-sm hover:translate-y-[-6px] transition-transform duration-300">
+              <img src={aboutImg3} alt="Interior design sample 3" className="section-image" />
+            </div>
           </div>
         </div>
 
