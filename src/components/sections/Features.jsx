@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import MainBtn from '../ui/Buttons/MainBtn'
 import FeatureCard from '../ui/Cards/FeatureCard'
 import featureImage1 from "/images/Index/Features/feature-image-01.jpg"
@@ -10,6 +12,8 @@ import featureImage6 from "/images/Index/Features/feature-image-06.jpg"
 import featureImage7 from "/images/Index/Features/feature-image-07.jpg"
 
 import { Bath, BedDouble, ChefHat, Flame, Lightbulb, Palette, Sofa, Square } from 'lucide-react'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const featureData = [
   {
@@ -63,11 +67,51 @@ const featureData = [
 ];
 
 const Features = () => {
+  const featuresRef = useRef(null);
+
+  useEffect(() => {
+    const commonScrollTriggerProps = {
+      toggleActions: "play none none reset",
+    };
+
+    const ctx = gsap.context(() => {
+      // Animación para el encabezado (Título, subtítulo y párrafo)
+      gsap.from(".feature-header-content > *", {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".feature-header-content",
+          start: "top 85%",
+          ...commonScrollTriggerProps,
+        },
+      });
+
+      // Animación para las tarjetas con stagger
+      gsap.from(".feature-card-item", {
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1, // Entrada rápida y fluida
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".features-grid",
+          start: "top 90%",
+          ...commonScrollTriggerProps,
+        },
+      });
+    }, featuresRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className='bg-light-yellow'>
+    <div className='bg-light-yellow' ref={featuresRef}>
       <div className='container py-[8%] mx-auto px-4 space-y-10'>
         <div className='feature-content section-container lg:items-center!'>
-          <div className=''>
+          <div className='feature-header-content'>
             <span className='title-span'>
               Our Features
             </span>
@@ -90,15 +134,16 @@ const Features = () => {
           />
         </div>
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
+        <div className='features-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
           {featureData.map((feature, index) => (
-            <FeatureCard
-              key={index}
-              image={feature.image}
-              icon={feature.icon}
-              title={feature.title}
-              description={feature.description}
-            />
+            <div className="feature-card-item" key={index}>
+              <FeatureCard
+                image={feature.image}
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+              />
+            </div>
           ))}
         </div>
       </div>
