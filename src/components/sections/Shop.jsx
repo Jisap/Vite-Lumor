@@ -52,7 +52,7 @@ const Shop = () => {
 
   return (
     <>
-      <div className="bg-light-yellow" ref={shopRef}>
+      <div className="bg-light-yellow">
         <div className="container py-[8%] mx-auto px-4">
           <div ref={headingRef} className="text-center w-full mb-16">
             <span className="title-span">
@@ -63,6 +63,10 @@ const Shop = () => {
               Trending
               <span className="text-coffe"> items</span>
             </h2>
+          </div>
+
+          <div ref={shopRef} className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-10">
+
           </div>
         </div>
       </div>
