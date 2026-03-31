@@ -4,6 +4,7 @@ import About from '../components/sections/About'
 import Features from '../components/sections/Features'
 import Steps from '../components/sections/Steps'
 import Brands from '../components/sections/Brands'
+import Shop from '../components/sections/Shop'
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Features />
       <Steps />
       <Brands />
+      <Shop />
     </>
   )
 }
