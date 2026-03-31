@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import PageBanner from "../components/ui/PageBanner";
 
 const Wishlist = () => {
@@ -92,6 +93,93 @@ const Wishlist = () => {
     toast.success(`${addedCount} product(s) added to cart`);                         // Mensaje de se añadieron los productos al carrito
     window.dispatchEvent(new Event("cartUpdated"));                                  // Se dispara un evento para que otros componentes se actualicen
   }
+
+  const addAllToCart = () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    wishlist.forEach((product) => {
+      const exist = cart.find((item) => item.id === product.id);
+      if (!exist) {
+        cart.push(product);
+      }
+    })
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    toast.success("All products added to cart");
+    window.dispatchEvent(new Event("cartUpdated"));
+  }
+
+  const wishlistRef = useRef();
+
+  useEffect(() => {
+    if (!wishlistRef.current) return;
+
+    const ctx = gsap.contex(() => {
+      const q = gsap.utils.selector(wishlistRef);
+
+      gsap.from(q(".wishlist-item"), {
+        y: 60,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".wishlist-section"),
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        },
+      });
+
+      gsap.from(q(".wishlist-empty"), {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.6,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: q(".wishlist-empty"),
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        },
+      });
+
+      gsap.from(q(".wishlist-actions"), {
+        y: 50,
+        opacity: 0.6,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".wishlist-actions"),
+          start: "top 90%",
+          toggleActions: "play none none reverse"
+        },
+      });
+
+      gsap.from(q(".wishlist-btn"), {
+        y: 30,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.2,
+        delay: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".wishlist-btn"),
+          start: "top 90%",
+          toggleActions: "play none none reverse"
+        },
+      });
+
+      gsap.from(q("wishlist-head"), {
+        y: -40,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".wishlist-head"),
+          start: "top 90%",
+          toggleActions: "play none none reverse"
+        },
+      });
+    })
+  }, [])
 
   return (
 
