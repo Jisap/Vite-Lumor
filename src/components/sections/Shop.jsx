@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ProductCard from "../ui/Cards/ProductCard";
+import ProductData from "../../assets/Data/ProductData.json"
 
 gsap.registerPlugin(ScrollTrigger);
-
 
 
 const Shop = () => {
@@ -66,7 +67,9 @@ const Shop = () => {
           </div>
 
           <div ref={shopRef} className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-10">
-
+            {ProductData.slice(4, 8).map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </div>
       </div>
