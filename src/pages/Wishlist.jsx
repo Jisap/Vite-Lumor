@@ -1,5 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import PageBanner from "../components/ui/PageBanner";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import toast from "react-hot-toast";
+import { X } from "lucide-react";
+import MainBtn from "../components/ui/Buttons/MainBtn";
+
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Wishlist = () => {
 
@@ -14,6 +22,7 @@ const Wishlist = () => {
       .filter((item) => cartData.some((cartItem) => cartItem.id === item.id))   // Filtra los productos del wishlist que YA están en el carrito
       .map((item) => item.id);                                                  // Extrae solo los IDs de esos productos
 
+    setWishlist(wishlistData);                                                  // Actualiza el estado del wishlist
     setSelected(preSelected);                                                   // Pre-marca como seleccionados los productos que ya están en el carrito
   }
 
@@ -114,7 +123,7 @@ const Wishlist = () => {
   useEffect(() => {
     if (!wishlistRef.current) return;
 
-    const ctx = gsap.contex(() => {
+    const ctx = gsap.context(() => {
       const q = gsap.utils.selector(wishlistRef);
 
       gsap.from(q(".wishlist-item"), {
@@ -182,7 +191,7 @@ const Wishlist = () => {
       gsap.from(q(".wishlist-th"), {
         x: -30,
         opacity: 0,
-        suration: 0.4,
+        duration: 0.4,
         stagger: 0.15,
         ease: "power3.out",
         scrollTrigger: {
@@ -204,6 +213,87 @@ const Wishlist = () => {
         title="Wishlist"
         currentPage="Wishlist"
       />
+
+      <div ref={wishlistRef} className='container mx-auto py-[8%] px-[4%]'>
+        {wishlist.length === 0 ? (
+          <p className="text-center text-lg bg-gray-50 shadow-md py-5 wishlist-empty">
+            No products in wishlist
+          </p>
+        ) : (
+          <>
+            <div className="hidden lg:block overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-black text-white wishlist-head">
+                  <tr>
+                    <th className="p-4 wishlist-th"></th>
+                    <th className="p-4 text-left font-medium wishlist-th">Product</th>
+                    <th className="p-4 text-left font-medium wishlist-th">Price</th>
+                    <th className="p-4 text-left font-medium wishlist-th">Stock</th>
+                    <th className="p-4"></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {wishlist.map((item) => (
+                    <tr key={item.id} className="border-b border-gray-200 wishlist-item">
+                      <td className="text-center border-r border-gray-200">
+                        <input
+                          type="checkbox"
+                          checked={selected.includes(item.id)}
+                          onChange={() => toggleSelect(item.id)}
+                          className="cursor-pointer"
+                        />
+                      </td>
+
+                      <td className="flex items-center px-10 gap-4 py-6 border-r border-gray-200">
+                        <button
+                          className="cursor-pointer"
+                          onClick={() => removeProduct(item.id)}
+                        >
+                          <X size={20} />
+                        </button>
+
+                        <img
+                          src={item.image1}
+                          alt={item.name}
+                          className='w-20 h-20 object-cover'
+                        />
+
+                        <p className="font-semibold">
+                          {item.name}
+                        </p>
+                      </td>
+
+                      <td className="text-center border-r bg-gray-200">
+                        ${item.price}.00
+                      </td>
+
+                      <td className="text-green-600 text-center border-r border-gray-200">
+                        In Stock
+                      </td>
+
+                      <td className="text-right">
+                        <MainBtn
+                          type="button"
+                          text="Add to Cart"
+                          onClick={() => addProductToCart(item)}
+                          className="bg-transparent! border! shadow-none! rounded-sm!"
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="lg:hidden">
+
+            </div>
+          </>
+        )}
+      </div>
     </>
   )
 }
+
+export default Wishlist;

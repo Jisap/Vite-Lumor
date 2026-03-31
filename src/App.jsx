@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import ScrollSmoother from 'gsap/ScrollSmoother'
 import gsap from 'gsap'
 import Wishlist from './pages/Wishlist'
+import { Toaster } from 'react-hot-toast'
 
 
 
@@ -33,6 +34,7 @@ const App = () => {
 
   return (
     <>
+      <Toaster position="top-right" reverseOrder={false} />
       <div id="smooth-wrapper" ref={smootherWrapperRef}>
         <Navbar />
         <div id="smooth-content" ref={smootherContentRef}>
