@@ -178,8 +178,24 @@ const Wishlist = () => {
           toggleActions: "play none none reverse"
         },
       });
-    })
-  }, [])
+
+      gsap.from(q(".wishlist-th"), {
+        x: -30,
+        opacity: 0,
+        suration: 0.4,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".wishlist-th"),
+          start: "top 90%",
+          toggleActions: "play none none reverse"
+        },
+      });
+    }, wishlistRef);
+
+    return () => ctx.revert();
+
+  }, [wishlist])
 
   return (
 
