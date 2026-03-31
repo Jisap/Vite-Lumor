@@ -6,6 +6,7 @@ import Navmenu from './Navmenu';
 import { ShoppingBag, TextAlignJustify, User } from 'lucide-react';
 import MobileMenu from './MobileMenu';
 import AuthModal from '../../ui/Modal/AuthModal';
+import { useCart } from '../../../hooks/useCart';
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -38,6 +39,8 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openAuth, setOpenAuth] = useState(false);
   const [scroll, setScroll] = useState(false);
+
+  const { cart } = useCart();
 
   const location = useLocation();
   const is404 = location.pathname === '/page404';
@@ -93,9 +96,11 @@ const Navbar = () => {
 
               <Link to="/cart" className="relative">
                 <ShoppingBag size={24} className="text-white cursor-pointer" />
-                <span className='card-count'>
-                  0
-                </span>
+                {cart.length > 0 && (
+                  <span className='card-count'>
+                    {cart.length}
+                  </span>
+                )}
               </Link>
 
               <button

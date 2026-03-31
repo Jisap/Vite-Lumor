@@ -7,6 +7,9 @@ import Home from './pages/Home'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import ScrollSmoother from 'gsap/ScrollSmoother'
 import gsap from 'gsap'
+import Wishlist from './pages/Wishlist'
+
+
 
 
 const App = () => {
@@ -36,7 +39,7 @@ const App = () => {
           <div className='min-h-screen overflow-clip'>
             <Routes>
               <Route path='/' element={<Home />} />
-
+              <Route path='/wishlist' element={<Wishlist />} />
             </Routes>
           </div>
           <Footer />
