@@ -227,6 +227,93 @@ const Checkout = () => {
               <h3 className='text-xl font-bold mb-4 border-b border-gray-200 pb-4'>
                 Your Order
               </h3>
+
+              <table className='w-full text-sm checkout-table mb-6'>
+                <thead>
+                  <tr className='border-b border-gray-200'>
+                    <th className='text-left py2'>Product</th>
+                    <th className='text-right py-2'>Subtotal</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {cart.map((item) => (
+                    <tr key={item.id} className='border-b'>
+                      <td className='py-4 text-gray-600'>{item.title} x 1</td>
+                      <td className='py-4 text-right font-medium'>${item.price.toFixed(2)}</td>
+                    </tr>
+                  ))}
+
+                  <tr className='border-b border-gray-200'>
+                    <td className='py-4 font-bold'>Subtotal</td>
+                    <td className='py-4 text-right font-bold'>
+                      ${subtotal.toFixed(2)}
+                    </td>
+                  </tr>
+
+                  <tr className='border-b border-gray-200'>
+                    <td className='py-4 font-bold'>Shipping</td>
+                    <td className='py-4 text-right text-gray-500'>
+                      Enter your address yo view shipping options.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td className='py-4 text-lg font-bold'>Total</td>
+                    <td className='py-4 text-right text-lg font-bold'>${subtotal.toFixed(2)}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div className='space-y-4 bg-gray-50 p-4 payment-options'>
+                <label className='flex items-start gap-3 cursor-pointer'>
+                  <input
+                    type="radio"
+                    name="payment"
+                    className='mt-1'
+                    checked={paymentMethod === "bank_transfer"}
+                    onChange={() => setPaymentMethod("bank_transfer")}
+                  />
+
+                  <div>
+                    <span className='font-bold'>Direct bank transfer</span>
+
+                    {paymentMethod === "bank_transfer" && (
+                      <p className='text-xs text-gray-500 mt-2'>
+                        Make your payment directly into our bank account. Please use your Order ID as the payment reference.
+                      </p>
+                    )}
+                  </div>
+                </label>
+
+                <label className='flex items-center gap-3 cursor-pointer'>
+                  <input
+                    type="radio"
+                    name="payment"
+                    checked={paymentMethod === "check"}
+                    onChange={() => setPaymentMethod("check")}
+                  />
+
+                  <span className='font-bold'>Check payments</span>
+                </label>
+
+                <label className='flex items-center gap-3 cursor-pointer'>
+                  <input
+                    type="radio"
+                    name="payment"
+                    checked={paymentMethod === "cod"}
+                    onChange={() => setPaymentMethod("cod")}
+                  />
+
+                  <span className='font-bold'>Cash on delivery</span>
+                </label>
+              </div>
+
+              <MainBtn
+                tpe="submit"
+                text="Place order"
+                className="w-full! rounded-sm! shadow-none! bg-black! text-white! mt-8"
+              />
             </div>
           </div>
         </div>
