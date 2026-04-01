@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import PageBanner from "../components/ui/PageBanner";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { X } from "lucide-react";
 import MainBtn from "../components/ui/Buttons/MainBtn";
 
@@ -286,12 +286,80 @@ const Wishlist = () => {
               </table>
             </div>
 
-            <div className="lg:hidden">
+            <div className="lg:hidden space-y-6">
+              {wishlist.map((item) => (
+                <div key={item.id} className="border border-gray-200 p-4 rounded-lg wishlist-item">
+                  <div className="flex justify-between">
+                    <input
+                      type="checkbox"
+                      checked={selected.includes(item.id)}
+                      onChange={() => toggleSelect(item.id)}
+                      className="cursor-pointer"
+                    />
 
+                    <button
+                      onClick={() => removeProduct(item.id)}
+                      className="cursor-pointer"
+                    >
+                      <X size={20} />
+                    </button>
+                  </div>
+
+                  <div className="flex items-center gap-4 mt-4">
+                    <img
+                      src={item.image1}
+                      alt={item.title}
+                      className="w-20 h-20 rounded-sm object-cover"
+                    />
+
+                    <p className="font-semibold">
+                      {item.title}
+                    </p>
+                  </div>
+
+                  <div className="flex justify-between mt-4">
+                    <span>Price</span>
+
+                    <span>${item.price}.00</span>
+                  </div>
+
+                  <div className="flex justify-between mt-2">
+                    <span>Status</span>
+
+                    <span className="text-grren-600">In stock</span>
+                  </div>
+
+                  <div className="mt-4">
+                    <MainBtn
+                      type="button"
+                      text="Add to Cart"
+                      onClick={() => addProductToCart(item)}
+                      className="w-full! bg-transparent! border! border-gray-200! shadow-none! rounded-sm!"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-col md:flex-row justify-end items-center mt-10 gap-4 wihslist-actions">
+              <MainBtn
+                type="button"
+                onClick={addSelectedToCart}
+                className="wishlist-btn w-full! md:w-60! bg-primary! text-white! shadow-none! rounded-sm!"
+                text="Add selected to cart"
+              />
+
+              <MainBtn
+                type="button"
+                onClick={addAllToCart}
+                className="wishlist-btn w-full! md:w-50! bg-primary! text-white! shadow-none! rounded-sm!"
+                text="Add all to cart"
+              />
             </div>
           </>
         )}
       </div>
+      {/* <Toaster position="top-right" /> */}
     </>
   )
 }
