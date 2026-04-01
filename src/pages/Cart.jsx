@@ -134,16 +134,16 @@ const Cart = () => {
         currentPage="Cart"
       />
 
-      <div ref={cartRef} className='container mx-auto py-[8%] px-4 wishlist-section'>
+      <div ref={cartRef} className='container mx-auto py-[8%] px-4 cart-section'>
         {cart.length === 0 ? (
-          <p className='text-center text-lg bg-gray-50 shadow-md py-5 wishlist-empty'>
+          <p className='text-center text-lg bg-gray-50 shadow-md py-5 cart-empty'>
             Cart is empty
           </p>
         ) : (
           <>
-            <div className='hidden lg:block overscroll-x-auto'>
+            <div className='hidden lg:block overflow-x-auto'>
               <table className='w-full border-collapse'>
-                <thead className='bg-black'>
+                <thead className='bg-black cart-head'>
                   <tr className='text-center text-white'>
                     <th className='p-4 cart-th'></th>
                     <th className='p-4 text-left font-medium cart-th'>Product</th>
@@ -172,7 +172,7 @@ const Cart = () => {
                         <td className='flex items-center gap-4 py-6'>
                           <img
                             src={item.image1}
-                            alt={item.name}
+                            alt={item.title}
                             className='w-20 h-20 object-cover'
                           />
 
@@ -240,52 +240,55 @@ const Cart = () => {
                       </span>
                     </div>
 
-                    <div className='flex items-center gap-4 mt-4'>
+                    <div className='flex gap-4 mt-4'>
                       <img
                         src={item.image1}
                         alt={item.title}
-                        className='w-20 h-20 object-cover rounded-sm'
+                        className='w-24 h-24 object-cover rounded-sm'
                       />
 
-                      <div>
-                        <p className='font-semibold'>
-                          {item.title}
-                        </p>
-                      </div>
-
-                      <div className='flex text-center justify-between mt-4'>
-                        <span>Price: </span>
-                        <span>${item.price}</span>
-                      </div>
-
-                      <div className='flex justify-between mt-4'>
-                        <span>Quantity: </span>
-
-                        <div className='flex items-center gap-3'>
-                          <button
-                            className='border border-gray-200 p-2 cursor-pointer'
-                            onClick={() => decrease(item.id)}
-                          >
-                            <Minus size={14} />
-                          </button>
-
-                          <span>
-                            {quantity}
-                          </span>
-
-                          <button
-                            className='border border-gray-200 p-2 cursor-pointer'
-                            onClick={() => increase(item.id)}
-                          >
-                            <Plus size={14} />
-                          </button>
+                      <div className='flex-1 flex flex-col justify-between'>
+                        <div>
+                          <p className='font-semibold'>
+                            {item.title}
+                          </p>
                         </div>
-                      </div>
 
-                      <div className='flex justify-between mt-4 font-semibold'>
-                        <span>Total: </span>
+                        <div className='space-y-2 mt-2'>
+                          <div className='flex justify-between text-sm'>
+                            <span className='text-gray-500'>Price: </span>
+                            <span>${item.price}</span>
+                          </div>
 
-                        <span>${item.price * quantity}</span>
+                          <div className='flex justify-between items-center text-sm'>
+                            <span className='text-gray-500'>Quantity: </span>
+
+                            <div className='flex items-center gap-3'>
+                              <button
+                                className='border border-gray-200 p-1.5 cursor-pointer hover:bg-gray-50'
+                                onClick={() => decrease(item.id)}
+                              >
+                                <Minus size={12} />
+                              </button>
+
+                              <span className='min-w-6 text-center'>
+                                {quantity}
+                              </span>
+
+                              <button
+                                className='border border-gray-200 p-1.5 cursor-pointer hover:bg-gray-50'
+                                onClick={() => increase(item.id)}
+                              >
+                                <Plus size={12} />
+                              </button>
+                            </div>
+                          </div>
+
+                          <div className='flex justify-between pt-2 border-t border-gray-100 font-semibold'>
+                            <span>Total: </span>
+                            <span>${item.price * quantity}</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -320,6 +323,24 @@ const Cart = () => {
                       <Icon icon="mdi:truck-delivery-outline" width="18" />
                     </button>
                   </div>
+                </div>
+
+                <div className='grid grid-cols-2 border-b border-gray-200 cart-item'>
+                  <div className='p-6 font-semibold bg-gray-50 border-r border-gray-200'>
+                    Total
+                  </div>
+
+                  <div className='p-6 text-right font-bold text-lg'>
+                    ${subtotal}.00
+                  </div>
+                </div>
+
+                <div className='p-6 cart-actions'>
+                  <MainBtn
+                    path="/checkout"
+                    text="Proceed to Checkout"
+                    className='cart-btn shadow-none! bg-black! text-white! w-full! rounded-sm!'
+                  />
                 </div>
               </div>
             </div>
