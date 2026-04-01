@@ -10,6 +10,7 @@ import gsap from 'gsap'
 import Wishlist from './pages/Wishlist'
 import { Toaster } from 'react-hot-toast'
 import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
 
 
 
@@ -44,6 +45,7 @@ const App = () => {
               <Route path='/' element={<Home />} />
               <Route path='/wishlist' element={<Wishlist />} />
               <Route path='/cart' element={<Cart />} />
+              <Route path='/checkout' element={<Checkout />} />
             </Routes>
           </div>
           <Footer />
