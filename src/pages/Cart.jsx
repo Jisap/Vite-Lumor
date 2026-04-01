@@ -220,6 +220,109 @@ const Cart = () => {
                 </tbody>
               </table>
             </div>
+
+            <div className='lg:hidden space-y-6'>
+              {cart.map((item) => {
+                const quantity = qty[item.id] || 1;
+
+                return (
+                  <div key={item.id} className='border border-gray-200 bg-white shadow-lg p-4 rounded-lg cart-item'>
+                    <div className='flex justify-between'>
+                      <button
+                        className='cursor-pointer'
+                        onClick={() => removeFromCart(item.id)}
+                      >
+                        <Icon icon="mdi:close" width="18" />
+                      </button>
+
+                      <span className='text-green-600'>
+                        In stock
+                      </span>
+                    </div>
+
+                    <div className='flex items-center gap-4 mt-4'>
+                      <img
+                        src={item.image1}
+                        alt={item.title}
+                        className='w-20 h-20 object-cover rounded-sm'
+                      />
+
+                      <div>
+                        <p className='font-semibold'>
+                          {item.title}
+                        </p>
+                      </div>
+
+                      <div className='flex text-center justify-between mt-4'>
+                        <span>Price: </span>
+                        <span>${item.price}</span>
+                      </div>
+
+                      <div className='flex justify-between mt-4'>
+                        <span>Quantity: </span>
+
+                        <div className='flex items-center gap-3'>
+                          <button
+                            className='border border-gray-200 p-2 cursor-pointer'
+                            onClick={() => decrease(item.id)}
+                          >
+                            <Minus size={14} />
+                          </button>
+
+                          <span>
+                            {quantity}
+                          </span>
+
+                          <button
+                            className='border border-gray-200 p-2 cursor-pointer'
+                            onClick={() => increase(item.id)}
+                          >
+                            <Plus size={14} />
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className='flex justify-between mt-4 font-semibold'>
+                        <span>Total: </span>
+
+                        <span>${item.price * quantity}</span>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            <div className='w-full flex justify-end items-center mt-10'>
+              <div className='w-full lg:w-120 border border-gray-200 rounded-sm'>
+                <div className='grid grid-cols-2 border-b border-gray-200 cart-item'>
+                  <div className='p-6 font-semibold bg-gray-50 border-r border-gray-200'>
+                    Subtotal
+                  </div>
+
+                  <div className='p-6 text-right font-semibold'>
+                    ${subtotal}.00
+                  </div>
+                </div>
+
+                <div className='grid grid-cols-2 border-b border-gray-200 cart-item'>
+                  <div className='p-6 font-semibold bg-gray-50 border-r border-gray-200'>
+                    Shipping
+                  </div>
+
+                  <div className='p-6 text-sm text-gray-600'>
+                    <p className='mb-3'>
+                      Enter your address to view shipping options.
+                    </p>
+
+                    <button className='flex items-center gap-2 font-semibold text-black boder-b border-dashed border-black'>
+                      Calculate Shipping
+                      <Icon icon="mdi:truck-delivery-outline" width="18" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </>
         )}
       </div>
