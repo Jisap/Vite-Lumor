@@ -17,7 +17,7 @@ const Checkout = () => {
   const { cart } = useCart();
   const [paymentMethod, setPaymentMethod] = useState("bank_transfer");
 
-  const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
+  const subtotal = cart.reduce((acc, item) => acc + (item.price * (item.quantity || 1)), 0); // Calcula subtotal considerando la cantidad de cada item
   const checkoutRef = useRef();
 
   useEffect(() => {
@@ -92,7 +92,7 @@ const Checkout = () => {
     }, checkoutRef);
 
     return () => ctx.revert();
-  }, [cart])
+  }, []) // Solo se ejecuta al montar el componente para evitar parpadeos al actualizar cantidades
 
 
   return (
@@ -231,7 +231,7 @@ const Checkout = () => {
               <table className='w-full text-sm checkout-table mb-6'>
                 <thead>
                   <tr className='border-b border-gray-200'>
-                    <th className='text-left py2'>Product</th>
+                    <th className='text-left py-2'>Product</th>
                     <th className='text-right py-2'>Subtotal</th>
                   </tr>
                 </thead>
@@ -239,8 +239,12 @@ const Checkout = () => {
                 <tbody>
                   {cart.map((item) => (
                     <tr key={item.id} className='border-b'>
-                      <td className='py-4 text-gray-600'>{item.title} x 1</td>
-                      <td className='py-4 text-right font-medium'>${item.price.toFixed(2)}</td>
+                      <td className='py-4 text-gray-600'>
+                        {item.title} x {item.quantity || 1} { /* Muestra la cantidad real */ }
+                      </td>
+                      <td className='py-4 text-right font-medium'>
+                        ${(item.price * (item.quantity || 1)).toFixed(2)} { /* Calcula subtotal del producto */ }
+                      </td>
                     </tr>
                   ))}
 

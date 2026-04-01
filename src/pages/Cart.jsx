@@ -12,30 +12,20 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 const Cart = () => {
+  const { cart, removeFromCart, updateQuantity } = useCart();       // Importa removeFromCart y el nuevo updateQuantity de useCart
 
-  const { cart, removeFromCart } = useCart();
-  const [qty, setQty] = useState({});
-
-  const increase = (id) => {
-    setQty((prev) => ({
-      ...prev,
-      [id]: (prev[id] || 1) < 5
-        ? (prev[id] || 1) + 1
-        : 5
-    }))
+  const increase = (id, currentQty) => {                            // Aumenta la cantidad del producto
+    const newQty = Math.min(currentQty + 1, 5);                     // Incrementa pero limita a un máximo de 5
+    updateQuantity(id, newQty);                                     // Actualiza la cantidad persistente
   }
 
-  const decrease = (id) => {
-    setQty((prev) => ({
-      ...prev,
-      [id]: (prev[id] || 1) > 1
-        ? prev[id] - 1
-        : 1
-    }));
+  const decrease = (id, currentQty) => {                            // Disminuye la cantidad del producto
+    const newQty = Math.max(currentQty - 1, 1);                     // Decrementa pero limita a un mínimo de 1
+    updateQuantity(id, newQty);                                     // Actualiza la cantidad persistente
   };
 
-  const subtotal = cart.reduce((acc, item) => {
-    return acc + (item.price * (qty[item.id] || 1));
+  const subtotal = cart.reduce((acc, item) => {                     // Calcula el subtotal recorriendo el carrito
+    return acc + (item.price * (item.quantity || 1));               // Multiplica el precio por la cantidad persistida
   }, 0);
 
   const cartRef = useRef();
@@ -125,7 +115,7 @@ const Cart = () => {
     }, cartRef);
 
     return () => ctx.revert();
-  }, [cart]);
+  }, []); // Solo se ejecuta al montar el componente para evitar parpadeos al actualizar cantidades
 
   return (
     <>
@@ -156,8 +146,6 @@ const Cart = () => {
 
                 <tbody>
                   {cart.map((item) => {
-                    const quantity = qty[item.id] || 1;
-
                     return (
                       <tr key={item.id} className='border-b cart-item'>
                         <td className='text-center'>
@@ -189,18 +177,18 @@ const Cart = () => {
                           <div className='flex justify-center items-center gap-3'>
                             <button
                               className='border border-gray-200 p-2 cursor-pointer'
-                              onClick={() => decrease(item.id)}
+                              onClick={() => decrease(item.id, item.quantity || 1)}
                             >
                               <Minus size={14} />
                             </button>
 
                             <span className='w-10 text-center'>
-                              {quantity}
+                              {item.quantity || 1}
                             </span>
 
                             <button
                               className='border border-gray-200 p-2 cursor-pointer'
-                              onClick={() => increase(item.id)}
+                              onClick={() => increase(item.id, item.quantity || 1)}
                             >
                               <Plus size={14} />
                             </button>
@@ -212,7 +200,7 @@ const Cart = () => {
                         </td>
 
                         <td className='text-center font-semibold'>
-                          ${item.price * quantity}
+                          ${item.price * (item.quantity || 1)}
                         </td>
                       </tr>
                     )
@@ -223,8 +211,6 @@ const Cart = () => {
 
             <div className='lg:hidden space-y-6'>
               {cart.map((item) => {
-                const quantity = qty[item.id] || 1;
-
                 return (
                   <div key={item.id} className='border border-gray-200 bg-white shadow-lg p-4 rounded-lg cart-item'>
                     <div className='flex justify-between'>
@@ -266,18 +252,18 @@ const Cart = () => {
                             <div className='flex items-center gap-3'>
                               <button
                                 className='border border-gray-200 p-1.5 cursor-pointer hover:bg-gray-50'
-                                onClick={() => decrease(item.id)}
+                                onClick={() => decrease(item.id, item.quantity || 1)}
                               >
                                 <Minus size={12} />
                               </button>
 
                               <span className='min-w-6 text-center'>
-                                {quantity}
+                                {item.quantity || 1}
                               </span>
 
                               <button
                                 className='border border-gray-200 p-1.5 cursor-pointer hover:bg-gray-50'
-                                onClick={() => increase(item.id)}
+                                onClick={() => increase(item.id, item.quantity || 1)}
                               >
                                 <Plus size={12} />
                               </button>
@@ -286,7 +272,7 @@ const Cart = () => {
 
                           <div className='flex justify-between pt-2 border-t border-gray-100 font-semibold'>
                             <span>Total: </span>
-                            <span>${item.price * quantity}</span>
+                            <span>${item.price * (item.quantity || 1)}</span>
                           </div>
                         </div>
                       </div>
