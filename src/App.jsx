@@ -9,6 +9,7 @@ import ScrollSmoother from 'gsap/ScrollSmoother'
 import gsap from 'gsap'
 import Wishlist from './pages/Wishlist'
 import { Toaster } from 'react-hot-toast'
+import Cart from './pages/Cart'
 
 
 
@@ -42,6 +43,7 @@ const App = () => {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/wishlist' element={<Wishlist />} />
+              <Route path='/cart' element={<Cart />} />
             </Routes>
           </div>
           <Footer />
