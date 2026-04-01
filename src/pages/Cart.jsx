@@ -34,7 +34,7 @@ const Cart = () => {
     }));
   };
 
-  const subtotal = Cart.reduce((acc, item) => {
+  const subtotal = cart.reduce((acc, item) => {
     return acc + (item.price * (qty[item.id] || 1));
   }, 0);
 
@@ -133,6 +133,96 @@ const Cart = () => {
         title="Cart"
         currentPage="Cart"
       />
+
+      <div ref={cartRef} className='container mx-auto py-[8%] px-4 wishlist-section'>
+        {cart.length === 0 ? (
+          <p className='text-center text-lg bg-gray-50 shadow-md py-5 wishlist-empty'>
+            Cart is empty
+          </p>
+        ) : (
+          <>
+            <div className='hidden lg:block overscroll-x-auto'>
+              <table className='w-full border-collapse'>
+                <thead className='bg-black'>
+                  <tr className='text-center text-white'>
+                    <th className='p-4 cart-th'></th>
+                    <th className='p-4 text-left font-medium cart-th'>Product</th>
+                    <th className='p-4 font-medium cart-th'>Price</th>
+                    <th className='p-4 font-medium cart-th'>Quantity</th>
+                    <th className='p-4 font-medium cart-th'>Status</th>
+                    <th className='p-4 font-medium cart-th'>Total</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {cart.map((item) => {
+                    const quantity = qty[item.id] || 1;
+
+                    return (
+                      <tr key={item.id} className='border-b cart-item'>
+                        <td className='text-center'>
+                          <button
+                            className='cursor-pointer'
+                            onClick={() => removeFromCart(item.id)}
+                          >
+                            <Icon icon="mdi:close" width="18" />
+                          </button>
+                        </td>
+
+                        <td className='flex items-center gap-4 py-6'>
+                          <img
+                            src={item.image1}
+                            alt={item.name}
+                            className='w-20 h-20 object-cover'
+                          />
+
+                          <p className='font-semibold text-lg'>
+                            {item.title}
+                          </p>
+                        </td>
+
+                        <td className='text-center'>
+                          ${item.price}
+                        </td>
+
+                        <td className='text-center'>
+                          <div className='flex justify-center items-center gap-3'>
+                            <button
+                              className='border border-gray-200 p-2 cursor-pointer'
+                              onClick={() => decrease(item.id)}
+                            >
+                              <Minus size={14} />
+                            </button>
+
+                            <span className='w-10 text-center'>
+                              {quantity}
+                            </span>
+
+                            <button
+                              className='border border-gray-200 p-2 cursor-pointer'
+                              onClick={() => increase(item.id)}
+                            >
+                              <Plus size={14} />
+                            </button>
+                          </div>
+                        </td>
+
+                        <td className='text-green-600 text-center'>
+                          In Stock
+                        </td>
+
+                        <td className='text-center font-semibold'>
+                          ${item.price * quantity}
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+      </div>
     </>
   )
 }
