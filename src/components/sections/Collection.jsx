@@ -18,41 +18,46 @@ const Collection = () => {
     if (!collectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Main image parallax-like entrance
+      // Main image - More dramatic entrance with scale
       gsap.from(".main-image-wrapper", {
-        y: 100,
+        y: 150,
+        scale: 0.95,
         opacity: 0,
-        duration: 1.5,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: collectionRef.current,
-          start: 'top 80%',
-        },
-      });
-
-      // Staggered text entrance
-      gsap.from(".text-reveal", {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out",
+        duration: 1.8,
+        ease: "expo.out",
         scrollTrigger: {
           trigger: collectionRef.current,
           start: 'top 75%',
+          toggleActions: "play none none reverse"
         },
       });
 
-      // Floating video card entrance
-      gsap.from(".video-card", {
+      // Staggered text - Lateral movement for more impact
+      gsap.from(".text-reveal", {
         x: 60,
         opacity: 0,
         duration: 1.2,
-        delay: 0.4,
-        ease: "power2.out",
+        stagger: 0.15,
+        ease: "power4.out",
         scrollTrigger: {
           trigger: collectionRef.current,
-          start: 'top 75%',
+          start: 'top 70%',
+          toggleActions: "play none none reverse"
+        },
+      });
+
+      // Video card - Snappy "back" entrance
+      gsap.from(".video-card", {
+        y: 100,
+        scale: 0.9,
+        opacity: 0,
+        duration: 1.5,
+        delay: 0.2, // Reduced delay for better flow
+        ease: "back.out(1.2)",
+        scrollTrigger: {
+          trigger: collectionRef.current,
+          start: 'top 65%',
+          toggleActions: "play none none reverse"
         },
       });
     }, collectionRef);

@@ -46,7 +46,7 @@ const Teams = () => {
           toggleActions: "play reverse play reverse"
         },
       });
-    }, headingRef);
+    }, teamRef);
 
     return () => ctx.revert();
   }, []);
