@@ -18,46 +18,43 @@ const Collection = () => {
     if (!collectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(".collection-image:first-child", {
-        y: 50,
+      // Main image parallax-like entrance
+      gsap.from(".main-image-wrapper", {
+        y: 100,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: collectionRef.current,
+          start: 'top 80%',
+        },
+      });
+
+      // Staggered text entrance
+      gsap.from(".text-reveal", {
+        y: 40,
         opacity: 0,
         duration: 1,
         stagger: 0.2,
         ease: "power3.out",
         scrollTrigger: {
           trigger: collectionRef.current,
-          start: 'top 85%',
-          toggleActions: "play none none reverse"
+          start: 'top 75%',
         },
       });
 
-      gsap.from(".collection-content", {
-        x: 50,
+      // Floating video card entrance
+      gsap.from(".video-card", {
+        x: 60,
         opacity: 0,
-        duration: 1,
-        delay: 0.2,
-        ease: "power3.out",
+        duration: 1.2,
+        delay: 0.4,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: collectionRef.current,
-          start: 'top 85%',
-          toggleActions: "play none none reverse"
+          start: 'top 75%',
         },
       });
-
-      gsap.from(".play-btn", {
-        scale: 0,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.3,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: collectionRef.current,
-          start: 'top 85%',
-          toggleActions: "play none none reverse"
-        },
-      });
-
-
     }, collectionRef);
 
     return () => ctx.revert();
@@ -65,40 +62,75 @@ const Collection = () => {
 
   return (
     <>
-      <div ref={collectionRef} className="collection container py-[8%] mx-auto px-4 section-container gap-10 lg:gap-14">
-        <div className="collection-image w-full lg:w-1/2 overflow-hidden group rounded-sm max-w-full lg:max-w-150 relative mx-auto">
-          <img
-            src={collectionImage1}
-            alt="collection-image"
-            className="section-image group-hover:scale-110 transition-all duration-300"
-          />
-        </div>
+      <div ref={collectionRef} className="collection container py-24 lg:py-32 mx-auto px-4">
+        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24 relative">
 
-        <div className="collection-content w-full lg:w-1/2">
-          <span className="title-span">
-            Our Collection
-          </span>
+          {/* Main Image Side - Asymmetric Column */}
+          <div className="main-image-wrapper w-full lg:w-7/12 relative group">
+            <div className="aspect-4/5 overflow-hidden rounded-2xl shadow-2xl relative z-10 transition-transform duration-700 group-hover:scale-[1.02]">
+              <img
+                src={collectionImage1}
+                alt="Main Collection"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
+            </div>
 
-          <h2 className="heading-1 mb-5">
-            Our sofas
-            <span className="text-coffee"> design-focused </span>
-            create style
-          </h2>
+            {/* Decorative Background Element */}
+            <div className="absolute -top-6 -left-6 w-32 h-32 bg-coffee/10 rounded-full blur-3xl z-0" />
+            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-coffee/5 rounded-full blur-3xl z-0" />
+          </div>
 
-          <p className="pera-text mb-20 sm:mb-40 lg:mb-60">
-            We are a company dedicated to the design and manufacture of high-quality furniture, with more than 20 years of experience in the market. Our products are made with the best materials and are designed to satisfy the needs of our customers.
-          </p>
+          {/* Content Side */}
+          <div className="w-full lg:w-5/12 z-20">
+            <div className="text-reveal">
+              <span className="title-span mb-6 tracking-[0.3em] text-coffee font-bold">
+                ESTABLISHED 2004
+              </span>
+            </div>
 
-          <div className="collection-image mx-0! relative flex justify-center items-center rounded-sm">
-            <img
-              src={collectionImage2}
-              alt="collection-image"
-            />
+            <div className="text-reveal">
+              <h2 className="text-4xl lg:text-6xl font-semibold leading-tight mb-8 text-heading tracking-tight">
+                Crafting <span className="font-light text-coffee/80 block lg:inline">Elegance</span> <br className="hidden lg:block" />
+                in every detail
+              </h2>
+            </div>
 
-            <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center pointer-events-none">
-              <Link to="https://www.youtube.com" className="play-btn bg-white w-14 h-14 flex justify-center items-center rounded-full cursor-pointer shadow-xl pointer-events-auto transition-transform hover:scale-110">
-                <Play size={20} fill="currentColor" className="text-coffee ml-1" />
-              </Link>
+            <div className="text-reveal">
+              <p className="pera-text text-lg leading-relaxed mb-12 opacity-80 max-w-lg">
+                We bridge the gap between architectural vision and artisanal craftsmanship.
+                Our sofas are more than furniture; they are the centerpiece of your story,
+                designed to evolve with your lifestyle.
+              </p>
+            </div>
+
+            {/* Video Card - Separate and clean */}
+            <div className="video-card relative mt-16 max-w-md ml-auto group">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl bg-white p-2 border border-coffee/10">
+                <div className="relative aspect-video rounded-xl overflow-hidden active:scale-95 transition-transform duration-300">
+                  <img
+                    src={collectionImage2}
+                    alt="Video Preview"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+
+                  {/* Play Button Overlay */}
+                  <div className="absolute inset-0 flex justify-center items-center bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                    <Link
+                      to="https://www.youtube.com"
+                      className="play-btn bg-white/95 backdrop-blur-sm w-16 h-16 flex justify-center items-center rounded-full cursor-pointer shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-white"
+                    >
+                      <Play size={24} fill="#ae9775" className="text-coffee ml-1 transition-colors group-hover:text-black" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Captions for Video */}
+              <div className="mt-4 px-2">
+                <p className="text-sm font-semibold tracking-widest text-coffee uppercase">Watch our process</p>
+                <p className="text-xs text-paragraph mt-1 italic">Artisan Workshop, 2024</p>
+              </div>
             </div>
           </div>
         </div>
