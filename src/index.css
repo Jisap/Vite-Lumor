@@ -246,3 +246,32 @@ h6 {
 .product-image:hover .product-icons li:nth-child(3) {
     transition-delay: 0.4s;
 }
+
+/* Play Button Animation */
+.play-btn {
+    position: relative;
+    z-index: 1;
+}
+
+.play-btn::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: inherit;
+    opacity: 0.4;
+    z-index: -1;
+    animation: playPulse 2s infinite;
+}
+
+@keyframes playPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}

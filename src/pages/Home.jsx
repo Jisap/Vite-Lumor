@@ -5,6 +5,7 @@ import Features from '../components/sections/Features'
 import Steps from '../components/sections/Steps'
 import Brands from '../components/sections/Brands'
 import Shop from '../components/sections/Shop'
+import Collection from '../components/sections/Collection'
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <Steps />
       <Brands />
       <Shop />
+      <Collection />
     </>
   )
 }
