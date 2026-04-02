@@ -256,7 +256,7 @@ const ShopDetails = () => {
               </div>
 
               <MainBtn
-                onClick={() => addToCart(product, qty)} // Ahora sincroniza la cantidad correctamente
+                onClick={() => addToCart(product, qty)} // Sincroniza la cantidad correctamente
                 text="Add to Cart"
                 className='rounded-none! shadow-none! bg-black! text-white! text-[16px] w-full! lg:w-60! px-12! py-8!'
               />
@@ -318,8 +318,10 @@ const ShopDetails = () => {
               </h2>
             </div>
 
-            <div>
-
+            <div ref={shopRef} className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-10'>
+              {ProductData.slice(12, 16).map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
             </div>
           </div>
         </div>
