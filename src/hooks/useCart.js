@@ -18,18 +18,22 @@ export const useCart = () => {
     }
   }, []);
 
-  const addToCart = (product) => {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const exist = cart.find((item) => item.id === product.id);
+  const addToCart = (product, quantity = 1) => {                          // Permite añadir producto y cantidad (por defecto 1)
+    let cartItems = JSON.parse(localStorage.getItem("cart")) || [];       // Obtiene los items actuales del localStorage
+    const index = cartItems.findIndex((item) => item.id === product.id);  // Busca si el producto ya está en el carrito
 
-    if (exist) {
-      toast.error("Product already in cart");
+    if (index !== -1) {
+      // Si el producto ya existe, sumamos la cantidad seleccionada a la actual
+      cartItems[index].quantity += quantity;
+      toast.success("Quantity updated in cart");
     } else {
-      cart.push({ ...product, quantity: 1 });                         // Agrega el producto con cantidad inicial 1
-      localStorage.setItem("cart", JSON.stringify(cart));
+      // Si no existe, lo añadimos con la cantidad inicial especificada
+      cartItems.push({ ...product, quantity });
       toast.success("Product added to cart");
-      window.dispatchEvent(new Event("cartUpdated"));
     }
+
+    localStorage.setItem("cart", JSON.stringify(cartItems));              // Guarda el carrito actualizado en localStorage
+    window.dispatchEvent(new Event("cartUpdated"));                       // Notifica a otros componentes del cambio
   }
 
   const updateQuantity = (id, quantity) => {                          // Función para actualizar la cantidad de un producto
