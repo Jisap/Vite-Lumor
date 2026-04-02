@@ -10,11 +10,52 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 const Teams = () => {
+
+  const teamRef = useRef();
+  const headingRef = useRef();
+
+  useEffect(() => {
+    if (!headingRef.current) return;
+    if (!teamRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(headingRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: 'top 90%',
+          toggleActions: "play reverse play reverse"
+        },
+      });
+
+      const cards = teamRef.current.querySelectorAll(".team-card");
+
+      gsap.from(cards, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: teamRef.current,
+          start: 'top 85%',
+          toggleActions: "play reverse play reverse"
+        },
+      });
+    }, headingRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
       <div className="bg-light-yellow">
         <div className="container py-[8%] mx-auto px-4">
-          <div className="text-center w-full mb-16">
+          <div ref={headingRef} className="text-center w-full mb-16">
             <span className="title-span">
               Our Team
             </span>
@@ -25,7 +66,7 @@ const Teams = () => {
             </h2>
           </div>
 
-          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-10">
+          <div ref={teamRef} className="grid lg:grid-cols-2 xl:grid-cols-4 gap-10">
             {TeamData.slice(3, 7).map(team => (
               <TeamCard key={team.id} {...team} />
             ))}
