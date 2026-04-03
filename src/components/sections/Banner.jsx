@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Banner = () => {
   const playRef = useRef(null);
   const bannerRef = useRef(null);
+  const bgRef = useRef(null);
 
   // mouse Parallax effect
   const handleMouseMove = (e) => {
@@ -36,7 +37,18 @@ const Banner = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animación de entrada para el botón Play
+      // 1. Animación de entrada para la Imagen de Fondo (Scale Zoom-out)
+      gsap.from(bgRef.current, {
+        scale: 1.3,
+        duration: 2.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: bannerRef.current,
+          start: "top 85%",
+        }
+      });
+
+      // 2. Animación de entrada para el botón Play
       gsap.from(playRef.current, {
         scale: 0,
         opacity: 0,
@@ -48,15 +60,13 @@ const Banner = () => {
         }
       });
 
-      // Efecto Parallax Real
-      gsap.fromTo(bannerRef.current,
+      // 3. Efecto Parallax de Scroll (Controlado por scroll)
+      gsap.fromTo(bgRef.current,
         {
-          scale: 0.9,
-          backgroundPosition: "50% 30%"
+          yPercent: -15
         },
         {
-          scale: 1,
-          backgroundPosition: "50% 70%",
+          yPercent: 15,
           ease: "none",
           scrollTrigger: {
             trigger: bannerRef.current,
@@ -75,25 +85,29 @@ const Banner = () => {
     <div className="container py-24 mx-auto px-4 overflow-hidden">
       <div
         ref={bannerRef}
-        className="banner relative rounded-[40px] overflow-hidden bg-no-repeat bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${bannerbg})`,
-          backgroundSize: "cover",
-          height: "600px"
-        }}
+        className="banner relative rounded-[40px] overflow-hidden bg-center"
+        style={{ height: "600px" }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
+        {/* Capa de la Imagen de Fondo */}
+        <div
+          ref={bgRef}
+          className="absolute inset-0 bg-no-repeat bg-cover bg-center"
+          style={{ 
+            backgroundImage: `url(${bannerbg})`,
+            scale: "1.1" // Scale base para permitir el movimiento parallax sin bordes
+          }}
+        ></div>
+
         <div className="overlay absolute inset-0 bg-black/40"></div>
 
-        {/* Play Button - Centered using absolute positioning and flexbox as a fallback */}
+        {/* Contenedor del Botón Play */}
         <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
           <div
             ref={playRef}
             className="play-btn w-24 h-24 sm:w-32 sm:h-32 border-2 border-white/50 rounded-full flex justify-center items-center cursor-pointer pointer-events-auto hover:bg-white hover:text-black transition-all duration-300 backdrop-blur-md group"
-            style={{
-               boxShadow: "0 0 30px rgba(0,0,0,0.3)"
-            }}
+            style={{ boxShadow: "0 0 30px rgba(0,0,0,0.3)" }}
           >
             {/* Play Icon */}
             <div className="relative z-10 w-full h-full flex items-center justify-center">
@@ -104,9 +118,6 @@ const Banner = () => {
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
-            
-            {/* Ripples / Animation background could go here if needed, 
-                but keeping it simple and centered first */}
           </div>
         </div>
       </div>
