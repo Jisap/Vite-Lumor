@@ -7,15 +7,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Mail, Minus, Phone, Plus } from "lucide-react"
 import MainBtn from "../components/ui/Buttons/MainBtn"
 import SocialIcons from "../components/ui/SocialIcons"
-
+import data from "../assets/data"
 
 gsap.registerPlugin(ScrollTrigger)
 
 
 const TeamDetails = () => {
 
-  const TeamDetails = useRef();
-  const [active, setActive] = useState(0);
+  const teamDetailsRef = useRef();
+  const [active, setActive] = useState(null);
   const { id } = useParams();
   const team = TeamData.find((team) => team.id === parseInt(id));
 
@@ -27,7 +27,7 @@ const TeamDetails = () => {
         productName={team.name}
       />
 
-      <div className="container py-[8%] mx-auto px-4">
+      <div ref={teamDetailsRef} className="container py-[8%] mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 mb-10">
           <div className="team-image rounded-sm group overflow-hidden w-full h-auto lg:h-150">
             <img
@@ -110,6 +110,63 @@ const TeamDetails = () => {
                 className="w-full! bg-black! text-white! rounded-none! shadow-none!"
               />
             </form>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10">
+          <div className="team-about">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-medium pb-3">
+              About Me
+            </h3>
+
+            <p className="pb-5 text-paragraph">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi excepturi fugiat veniam magni cumque, obcaecati consequatur quasi officia, aliquam omnis illum soluta nostrum velit exercitationem illo, laborum praesentium facilis dolore.
+            </p>
+
+            <p className="pb-5 text-paragraph">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi excepturi fugiat veniam magni cumque, obcaecati consequatur quasi officia, aliquam omnis illum soluta nostrum velit exercitationem illo, laborum praesentium facilis dolore.
+            </p>
+
+            <MainBtn
+              text="Contact Me"
+              className="bg-black! text-white! rounded-sm! shadow-none!"
+            />
+          </div>
+
+          <div className="team-experience">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-medium pb-6">
+              Experience
+            </h3>
+
+            <ul className="space-y-4">
+              {data.experiences.map((item, index) => (
+                <li key={index} className="bg-gray-100 overflow-hidden">
+                  <div
+                    onClick={() => setActive(active === index ? null : index)}
+                    className="flex justify-between items-center px-6 py-5 cursor-pointer"
+                  >
+                    <span className="font-semibold">
+                      {item.title}
+                    </span>
+
+                    {active === index ? <Minus /> : <Plus />}
+                  </div>
+
+                  <div
+                    className={`
+                      px-6 transition-all duration-500 ease-in-out overflow-hidden
+                      ${active === index ? "max-h-40 opacity-100 pb-5" : "max-h-0 opacity-0"}
+                    `}
+                  >
+                    <p className="text-gray-600">{item.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="team-skills-form lg:col-span-2 xl:col-span-1">
+
           </div>
         </div>
       </div>
