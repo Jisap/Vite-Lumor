@@ -26,6 +26,35 @@ const Blogs = () => {
               Latest <span className="text-coffee">News</span>
             </h2>
           </div>
+
+          <div ref={blogRef}>
+            <Swiper
+              spaceBetween={30}
+              slidesPerView={1}
+              navigation={{
+                nextEl: ".blog-next",
+                prevEl: ".blog-prev",
+              }}
+              pagination={{
+                clickable: true,
+              }}
+              breakpoints={{
+                768: {
+                  slidesPerView: 2,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+              }}
+              className="mb-40"
+            >
+              {blogData.map((blog) => (
+                <SwiperSlide key={blog.id}>
+                  Blog Card
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </div>
     </>
