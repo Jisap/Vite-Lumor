@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Mail, Minus, Phone, Plus } from "lucide-react"
 import MainBtn from "../components/ui/Buttons/MainBtn"
 import SocialIcons from "../components/ui/SocialIcons"
-import data from "../assets/data"
+import data from "../assets/data.jsx"
 import TeamSkills from "../components/ui/TeamSkills"
 
 gsap.registerPlugin(ScrollTrigger)

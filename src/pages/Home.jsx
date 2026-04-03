@@ -7,6 +7,7 @@ import Brands from '../components/sections/Brands'
 import Shop from '../components/sections/Shop'
 import Collection from '../components/sections/Collection'
 import Teams from '../components/sections/Teams'
+import Banner from '../components/sections/Banner'
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
       <Shop />
       <Collection />
       <Teams />
+      <Banner />
     </>
   )
 }
