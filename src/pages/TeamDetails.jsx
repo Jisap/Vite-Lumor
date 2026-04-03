@@ -6,6 +6,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Mail, Minus, Phone, Plus } from "lucide-react"
 import MainBtn from "../components/ui/Buttons/MainBtn"
+import SocialIcons from "../components/ui/SocialIcons"
 
 
 gsap.registerPlugin(ScrollTrigger)
@@ -76,6 +77,39 @@ const TeamDetails = () => {
                 <span className="text-muted">{team.email}</span>
               </li>
             </ul>
+
+            <SocialIcons />
+          </div>
+
+          <div className="team-contact-form bg-[#f3f2f2] px-5 py-8 lg:px-8 lg:py-10 rounded-sm lg:col-span-2 xl:col-span-1">
+            <h4 className="text-center text-2xl font-medium pb-10">
+              Contact me directly
+            </h4>
+
+            <form method="post">
+              <input
+                type="text"
+                placeholder="Your Name"
+                className="w-full rounded-sm py-4 bg-white px-4 outline-none mb-8"
+              />
+
+              <input
+                type="email"
+                placeholder="Your Email address"
+                className="w-full rounded-sm py-4 bg-white px-4 outline-none mb-8"
+              />
+
+              <textarea
+                placeholder="Message"
+                className="w-full rounded-sm py-4 bg-white px-4 outline-none resize-none mb-8 h-40"
+              />
+
+              <MainBtn
+                type="submit"
+                text="Send Message"
+                className="w-full! bg-black! text-white! rounded-none! shadow-none!"
+              />
+            </form>
           </div>
         </div>
       </div>
