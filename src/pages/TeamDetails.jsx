@@ -15,10 +15,71 @@ gsap.registerPlugin(ScrollTrigger)
 
 const TeamDetails = () => {
 
-  const teamDetailsRef = useRef();
+  const teamRef = useRef();
   const [active, setActive] = useState(null);
   const { id } = useParams();
   const team = TeamData.find((team) => team.id === parseInt(id));
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const q = gsap.utils.selector(teamRef);
+
+      // Animación para la imagen del equipo
+      gsap.from(q(".team-image"), {
+        x: -50,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".team-image"),
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        },
+      });
+
+      // Animación escalonada (stagger) para los textos de contacto
+      gsap.from(q(".team-content > *"), {
+        x: 50,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".team-content"),
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        },
+      });
+
+      // Animación para el formulario de contacto
+      gsap.from(q(".team-contact-form"), {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".team-contact-form"),
+          start: "top 90%",
+          toggleActions: "play none none reverse"
+        },
+      });
+
+      // Animación para las secciones inferiores (About, Experience, Skills)
+      gsap.from([q(".team-about"), q(".team-experience"), q(".team-skills-form")], {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".team-about"),
+          start: "top 90%",
+          toggleActions: "play none none reverse"
+        },
+      });
+    }, teamRef);
+    return () => ctx.revert();
+  }, []);
 
   return (
     <>
@@ -28,7 +89,7 @@ const TeamDetails = () => {
         productName={team.name}
       />
 
-      <div ref={teamDetailsRef} className="container py-[8%] mx-auto px-4">
+      <div ref={teamRef} className="container py-[8%] mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 mb-10">
           <div className="team-image rounded-sm group overflow-hidden w-full h-auto lg:h-150">
             <img
