@@ -8,6 +8,7 @@ import { Mail, Minus, Phone, Plus } from "lucide-react"
 import MainBtn from "../components/ui/Buttons/MainBtn"
 import SocialIcons from "../components/ui/SocialIcons"
 import data from "../assets/data"
+import TeamSkills from "../components/ui/TeamSkills"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -166,7 +167,7 @@ const TeamDetails = () => {
           </div>
 
           <div className="team-skills-form lg:col-span-2 xl:col-span-1">
-
+            <TeamSkills skills={team.Skills} />
           </div>
         </div>
       </div>
