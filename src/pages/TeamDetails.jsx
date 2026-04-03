@@ -1,0 +1,86 @@
+import { useEffect, useRef, useState } from "react"
+import { useParams } from "react-router-dom"
+import TeamData from "../assets/data/TeamData.json"
+import PageBanner from "../components/ui/PageBanner"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { Mail, Minus, Phone, Plus } from "lucide-react"
+import MainBtn from "../components/ui/Buttons/MainBtn"
+
+
+gsap.registerPlugin(ScrollTrigger)
+
+
+const TeamDetails = () => {
+
+  const TeamDetails = useRef();
+  const [active, setActive] = useState(0);
+  const { id } = useParams();
+  const team = TeamData.find((team) => team.id === parseInt(id));
+
+  return (
+    <>
+      <PageBanner
+        title="Team Details"
+        currentPage="Team Details"
+        productName={team.name}
+      />
+
+      <div className="container py-[8%] mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 mb-10">
+          <div className="team-image rounded-sm group overflow-hidden w-full h-auto lg:h-150">
+            <img
+              src={team.image}
+              alt={team.name}
+              className="group-hover:scale-110 transition-all duration-200 section-image"
+            />
+          </div>
+
+          <div className="team-content">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-medium pb-3">
+              {team.name}
+            </h3>
+
+            <span className="text-2xl text-coffee pb-5 block">
+              {team.category}
+            </span>
+
+            <p className="text-paragraph leading-relaxed pb-8">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur corporis optio quas! Nemo dolore numquam natus unde, minus quo explicabo eveniet assumenda illo eligendi dolorem tempora dignissimos quasi, excepturi molestiae.
+            </p>
+
+            <ul className="space-y-2 pb-8">
+              <li>
+                <span className="font-semibold text-lg">Age: </span>
+                <span className="text-muted">{team.age}</span>
+              </li>
+
+              <li>
+                <span className="font-semibold text-lg">Experience: </span>
+                <span className="text-muted">{team.Experience}</span>
+              </li>
+
+              <li>
+                <span className="font-semibold text-lg">Specialization: </span>
+                <span className="text-muted">{team.Specialization}</span>
+              </li>
+            </ul>
+
+            <ul className="space-y-2 pb-10">
+              <li className="centered-row gap-2">
+                <Phone size={25} className="text-coffee-light" />
+                <span className="text-muted">{team.mobnumber}</span>
+              </li>
+              <li className="centered-row gap-2">
+                <Mail size={25} className="text-coffee-light" />
+                <span className="text-muted">{team.email}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default TeamDetails

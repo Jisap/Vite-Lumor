@@ -12,6 +12,7 @@ import { Toaster } from 'react-hot-toast'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import ShopDetails from './pages/ShopDetails'
+import TeamDetails from './pages/TeamDetails'
 
 
 
@@ -48,6 +49,7 @@ const App = () => {
               <Route path='/cart' element={<Cart />} />
               <Route path='/checkout' element={<Checkout />} />
               <Route path='/product/:id' element={<ShopDetails />} />
+              <Route path='/team/:id' element={<TeamDetails />} />
             </Routes>
           </div>
           <Footer />
