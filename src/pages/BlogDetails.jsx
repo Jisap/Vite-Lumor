@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import { Gift, Percent, ShoppingBag, WalletMinimal } from "lucide-react"
+import BlogCard from "../components/ui/Cards/BlogCard"
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -22,15 +23,128 @@ gsap.registerPlugin(ScrollTrigger);
 
 const BlogDetails = () => {
 
-  const blogdetailsRef = useRef(null);
+  const pageRef = useRef(null);
 
   const { id } = useParams();
   const blog = blogData.find((blog) => blog.id === parseInt(id));
-  if (!blog) return <p className="">Blog not found</p>
+
+  useEffect(() => {
+    if (!blog) return;
+
+    const ctx = gsap.context(() => {
+      // Banner animation
+      gsap.from(".animate-banner", {
+        opacity: 0,
+        scale: 1.05,
+        duration: 1.5,
+        ease: "power3.out"
+      });
+
+      // Header animation
+      gsap.from(".animate-header", {
+        y: 60,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".animate-header",
+          start: "top 90%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Text sections staggered animation
+      gsap.utils.toArray(".animate-text").forEach((section) => {
+        gsap.from(section.children, {
+          y: 40,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          }
+        });
+      });
+
+      // Gallery staggered animation
+      gsap.from(".animate-gallery img", {
+        y: 50,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.3,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".animate-gallery",
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Quote animation
+      gsap.from(".animate-quote", {
+        x: -50,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".animate-quote",
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Content image
+      gsap.from(".animate-image img", {
+        opacity: 0,
+        scale: 0.95,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".animate-image",
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Form animation
+      gsap.from(".animate-form", {
+        y: 60,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".animate-form",
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Related Section
+      gsap.from(".animate-related", {
+        y: 40,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".animate-related",
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+    }, pageRef);
+
+    return () => ctx.revert();
+  }, [id, blog]);
+
+  if (!blog) return <p className="p-20 text-center">Blog not found</p>
 
   return (
-    <>
-      <div ref={blogdetailsRef} className="w-full h-full">
+    <div ref={pageRef}>
+      <div className="w-full h-full">
         <div
           className='section-banner animate-banner bg-center bg-cover bg-no-repeat min-h-120 md:min-h-150 flex flex-col justify-center relative z-1 pt-22 overflow-hidden'
           style={{
@@ -41,7 +155,7 @@ const BlogDetails = () => {
         </div>
       </div>
 
-      <div className="bg-light-yellow">
+      <div className="bg-light-yellow pb-20">
         <div className="container mx-auto px-4 -translate-y-50 z-2 relative">
           <div className="blog-info animate-header bg-white shadow-sm rounded-sm text-center mb-10 py-20 px-8">
             <span className="bg-primary text-white px-3 py-1 rounded-sm">{blog.category}</span>
@@ -99,43 +213,47 @@ const BlogDetails = () => {
             <p className="text-paragraph mt-4 leading-6">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, distinctio alias! Quo, nemo alias architecto praesentium quas facilis debitis. Repellat veritatis soluta est quas, porro illum numquam doloribus dolorem pariatur!
             </p>
+          </div>
 
-            <div className="animate-gallery lg:max-w-6xl centered-row flex-wrap lg:flex-nowrap justify-center mx-auto gap-3 my-10">
-              <img
-                src={gallery1}
-                alt="post-image"
-                className="h-80 xl:h-100 object-cover"
-              />
-              <img
-                src={gallery2}
-                alt="post-image"
-                className="h-80 xl:h-100 object-cover"
-              />
+          <div className="animate-gallery lg:max-w-6xl centered-row flex-wrap lg:flex-nowrap justify-center mx-auto gap-3 my-10 px-4">
+            <img
+              src={gallery1}
+              alt="post-image"
+              className="h-80 xl:h-100 object-cover w-full lg:w-1/2"
+            />
+            <img
+              src={gallery2}
+              alt="post-image"
+              className="h-80 xl:h-100 object-cover w-full lg:w-1/2"
+            />
+          </div>
+
+          <div className="w-full lg:max-w-4xl mx-auto">
+            <div className="animate-text">
+              <p className="text-paragraph mt-4 leading-6">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, distinctio alias! Quo, nemo alias architecto praesentium quas facilis debitis. Repellat veritatis soluta est quas, porro illum numquam doloribus dolorem pariatur!
+              </p>
+
+              <p className="text-paragraph mt-4 leading-6">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, distinctio alias! Quo, nemo alias architecto praesentium quas facilis debitis. Repellat veritatis soluta est quas, porro illum numquam doloribus dolorem pariatur!
+              </p>
+
+              <p className="text-paragraph mt-4 leading-6">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, distinctio alias! Quo, nemo alias architecto praesentium quas facilis debitis. Repellat veritatis soluta est quas, porro illum numquam doloribus dolorem pariatur!
+              </p>
             </div>
 
-            <div className="w-full lg:max-w-4xl mx-auto animate-text">
-              <p className="text-paragraph mt-4 leading-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, distinctio alias! Quo, nemo alias architecto praesentium quas facilis debitis. Repellat veritatis soluta est quas, porro illum numquam doloribus dolorem pariatur!
+            <div className="bg-white p-10 mt-10 rounded-sm relative overflow-hidden animate-quote">
+              <Quote size={40} className="text-yellow-500 mb-5" />
+
+              <p className="max-w-3xl text-lg leading-tight">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor pariatur explicabo, obcaecati accusantium doloribus consequatur est assumenda, dolores culpa voluptas blanditiis expedita ipsam nulla fuga optio porro quas harum impedit?
               </p>
 
-              <p className="text-paragraph mt-4 leading-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, distinctio alias! Quo, nemo alias architecto praesentium quas facilis debitis. Repellat veritatis soluta est quas, porro illum numquam doloribus dolorem pariatur!
-              </p>
+              <div className="absolute left-0 top-0 w-1 h-full bg-yellow-500"></div>
+            </div>
 
-              <p className="text-paragraph mt-4 leading-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, distinctio alias! Quo, nemo alias architecto praesentium quas facilis debitis. Repellat veritatis soluta est quas, porro illum numquam doloribus dolorem pariatur!
-              </p>
-
-              <div className="bg-white p-10 mt-10 rounded-sm relative overflow-hidden animate-quote">
-                <Quote size={40} className="text-yellow-500 mb-5" />
-
-                <p className="max-w-3xl text-lg leading-tight">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor pariatur explicabo, obcaecati accusantium doloribus consequatur est assumenda, dolores culpa voluptas blanditiis expedita ipsam nulla fuga optio porro quas harum impedit?
-                </p>
-
-                <div className="absolute left-0 top-0 w-1 h-full bg-yellow-500"></div>
-              </div>
-
+            <div className="animate-text">
               <p className="text-paragraph mt-4 leading-6">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, distinctio alias! Quo, nemo alias architecto praesentium quas facilis debitis. Repellat veritatis soluta est quas, porro illum numquam doloribus dolorem pariatur!
               </p>
@@ -148,86 +266,101 @@ const BlogDetails = () => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, distinctio alias! Quo, nemo alias architecto praesentium quas facilis debitis. Repellat veritatis soluta est quas, porro illum numquam doloribus dolorem pariatur!
               </p>
             </div>
+          </div>
 
-            <div className="animate-image lg:max-w-6xl centered-row justify-center mx-auto gap-3 my-10">
-              <img
-                src={post}
-                alt="post-image"
-              />
-            </div>
+          <div className="animate-image lg:max-w-6xl centered-row justify-center mx-auto gap-3 my-10 px-4">
+            <img
+              src={post}
+              alt="post-image"
+              className="w-full object-cover rounded-sm"
+            />
+          </div>
 
-            <div className="w-full lg:max-w-4xl mx-auto animate-text">
-              <p className="text-paragraph mt-4 leading-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias consequuntur aliquid suscipit expedita ab illo quibusdam adipisci reiciendis. Obcaecati incidunt quaerat eligendi, molestias cum consectetur! Dolorum nobis libero eveniet veniam?
-              </p>
+          <div className="w-full lg:max-w-4xl mx-auto animate-text">
+            <p className="text-paragraph mt-4 leading-6">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias consequuntur aliquid suscipit expedita ab illo quibusdam adipisci reiciendis. Obcaecati incidunt quaerat eligendi, molestias cum consectetur! Dolorum nobis libero eveniet veniam?
+            </p>
 
-              <p className="text-paragraph mt-4 leading-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias consequuntur aliquid suscipit expedita ab illo quibusdam adipisci reiciendis. Obcaecati incidunt quaerat eligendi, molestias cum consectetur! Dolorum nobis libero eveniet veniam?
-              </p>
-            </div>
+            <p className="text-paragraph mt-4 leading-6">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias consequuntur aliquid suscipit expedita ab illo quibusdam adipisci reiciendis. Obcaecati incidunt quaerat eligendi, molestias cum consectetur! Dolorum nobis libero eveniet veniam?
+            </p>
+          </div>
 
-            <div className="w-full lg:max-w-4xl mx-auto my-10 animate-form">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-12 text-heading">
-                Leave a comment
-              </h2>
+          <div className="w-full lg:max-w-4xl mx-auto my-10 animate-form">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-12 text-heading">
+              Leave a comment
+            </h2>
 
-              <form className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <input
-                    type="text"
-                    placeholder="Your name"
-                    className="w-full bg-transparent border-b border-gray-400 focus:border-teal-600 focus:outline-none py-3 transition-colors"
-                    required
-                  />
-                  <input
-                    type="email"
-                    placeholder="Your email"
-                    className="w-full bg-transparent border-b border-gray-400 focus:border-teal-600 focus:outline-none py-3 transition-colors"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-8">
-                  <textarea
-                    rows={4}
-                    placeholder="Your comment"
-                    className="w-full bg-transparent border-b border-gray-400 focus:border-teal-600 focus:outline-none py-3 transition-colors resize-none"
-                    required
-                  />
-
-                  <div className="flex items-center gap-3 text-gray-600 text-sm">
-                    <input
-                      type="checkbox"
-                      id="save-info"
-                      className="w-4 h-4 accent-teal-600 cursor-pointer"
-                    />
-                    <label htmlFor="save-info" className="cursor-pointer hover:text-teal-600 transition-colors">
-                      I agree that my submitted data is being collected and stored.
-                    </label>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="bg-teal-600 text-white px-10 py-4 font-semibold hover:bg-black transition-all duration-300 rounded-sm">
-                    Leave a Comment
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            <div className="w-full lg:max-w-4xl mx-auto animate-related">
-              <h3 className="mt-10 text-2xl font-semibold text-heading mb-5">
-                You May Also Like
-              </h3>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-
+            <form className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <input
+                  type="text"
+                  placeholder="Your name"
+                  className="w-full bg-transparent border-b border-gray-400 focus:border-teal-600 focus:outline-none py-3 transition-colors"
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  className="w-full bg-transparent border-b border-gray-400 focus:border-teal-600 focus:outline-none py-3 transition-colors"
+                  required
+                />
               </div>
+
+              <div className="space-y-8">
+                <textarea
+                  rows={4}
+                  placeholder="Your comment"
+                  className="w-full bg-transparent border-b border-gray-400 focus:border-teal-600 focus:outline-none py-3 transition-colors resize-none"
+                  required
+                />
+
+                <div className="flex items-center gap-3 text-gray-600 text-sm">
+                  <input
+                    type="checkbox"
+                    id="save-info"
+                    className="w-4 h-4 accent-teal-600 cursor-pointer"
+                  />
+                  <label htmlFor="save-info" className="cursor-pointer hover:text-teal-600 transition-colors">
+                    I agree that my submitted data is being collected and stored.
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  className="bg-teal-600 text-white px-10 py-4 font-semibold hover:bg-black transition-all duration-300 rounded-sm">
+                  Leave a Comment
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div className="w-full lg:max-w-4xl mx-auto animate-related">
+            <h3 className="mt-10 text-2xl font-semibold text-heading mb-5">
+              You May Also Like
+            </h3>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+              {blogData
+                .filter((b) => b.id !== parseInt(id))
+                .slice(0, 2)
+                .map((blog) => (
+                  <div key={blog.id}>
+                    <BlogCard
+                      image={blog.image}
+                      title={blog.title}
+                      date={blog.date}
+                      category={blog.category}
+                      description={blog.description}
+                      id={blog.id}
+                    />
+                  </div>
+                ))}
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
