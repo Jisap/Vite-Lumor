@@ -16,6 +16,56 @@ const Blogs = () => {
   const blogRef = useRef();
   const featureRef = useRef();
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Heading animation
+      gsap.from(headingRef.current, {
+        y: 60,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 90%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Swiper slides staggered animation
+      const swiperSlides = blogRef.current.querySelectorAll(".swiper-slide");
+      gsap.from(swiperSlides, {
+        y: 60,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.2, // Added stagger for a better look
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: blogRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        },
+      });
+
+      // Features row staggered animation
+      const featureItems = featureRef.current.querySelectorAll(".item");
+      gsap.from(featureItems, {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: featureRef.current,
+          start: "top 90%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+
+    return () => ctx.revert();
+
+  }, [])
+
   return (
     <>
       <div className="bg-light-yellow">

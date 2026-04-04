@@ -8,7 +8,7 @@ const BlogCard = ({ image, title, date, category, id }) => {
       <div className='blog-item w-full group'>
         <Link to={`/blog/${id}`} className="mb-10 block">
           <div className="blog-image w-full overflow-hidden rounded-sm">
-            <img src={image} alt="post-image" className="section-image group-hover:scale-110 trnsition-all duration-300" />
+            <img src={image} alt="post-image" className="section-image group-hover:scale-110 transition-all duration-300" />
           </div>
         </Link>
 
