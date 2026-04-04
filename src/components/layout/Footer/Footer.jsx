@@ -47,36 +47,36 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="footer-links links">
+          <div className="footer-item links">
             <h3 className="text-xl font-semibold mb-6">Links</h3>
 
             <ul className="space-y-3 w-fit">
               <li className="w-fit">
-                <Link to="/" className="text-muted font-light pb-2 block text-lg hover:underline transition-all duration-300 hover:text-white">
+                <Link to="/" className="text-muted font-light pb-2 block text-lg transition-all duration-300 hover:text-white">
                   Home
                 </Link>
               </li>
 
               <li className="w-fit">
-                <Link to="/blog" className="text-muted font-light pb-2 block text-lg hover:underline transition-all duration-300 hover:text-white">
+                <Link to="/blog" className="text-muted font-light pb-2 block text-lg transition-all duration-300 hover:text-white">
                   Blog
                 </Link>
               </li>
 
               <li className="w-fit">
-                <Link to="/shop" className="text-muted font-light pb-2 block text-lg hover:underline transition-all duration-300 hover:text-white">
+                <Link to="/shop" className="text-muted font-light pb-2 block text-lg transition-all duration-300 hover:text-white">
                   Shop
                 </Link>
               </li>
 
               <li className="w-fit">
-                <Link to="/about" className="text-muted font-light pb-2 block text-lg hover:underline transition-all duration-300 hover:text-white">
+                <Link to="/about" className="text-muted font-light pb-2 block text-lg transition-all duration-300 hover:text-white">
                   About
                 </Link>
               </li>
 
               <li className="w-fit">
-                <Link to="/contact" className="text-muted font-light pb-2 block text-lg hover:underline transition-all duration-300 hover:text-white">
+                <Link to="/contact" className="text-muted font-light pb-2 block text-lg transition-all duration-300 hover:text-white">
                   Contact
                 </Link>
               </li>
@@ -84,8 +84,10 @@ const Footer = () => {
           </div>
 
           {/* Social */}
-          <div>
+          <div className="footer-item social">
+            <h3 className="text-xl font-semibold mb-6">Get in Touch</h3>
 
+            <SocialIcons />
           </div>
         </footer>
       </div>

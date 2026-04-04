@@ -295,5 +295,33 @@ h6 {
     content: "";
     display: block;
     background-color: var(--color-heading);
+}
 
+.footer-item.links ul li {
+    color: var(--color-muted);
+    transition: all .3s ease-in-out
+}
+
+.footer-item.links ul li:hover {
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.footer-item.links ul li a::after {
+    content: "" !important;
+    display: block !important;
+    position: relative;
+    z-index: 1;
+    top: auto;
+    bottom: -2px;
+    left: 0;
+    transform: none;
+    width: 0;
+    height: 2px;
+    transition: all .2s ease;
+    background-color: #fff;
+}
+
+.footer-item.links ul li a:hover::after {
+    width: 100% !important;
 }
