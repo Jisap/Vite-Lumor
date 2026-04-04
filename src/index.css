@@ -270,8 +270,30 @@ h6 {
         transform: scale(1);
         opacity: 0.4;
     }
+
     100% {
         transform: scale(1.8);
         opacity: 0;
     }
+}
+
+.post_meta {
+    margin: 0 0 12px;
+}
+
+.blog-content {
+    padding: 0 0 0 50px;
+    position: relative;
+}
+
+.blog-content::after {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 35px;
+    height: 2px;
+    content: "";
+    display: block;
+    background-color: var(--color-heading);
+
 }

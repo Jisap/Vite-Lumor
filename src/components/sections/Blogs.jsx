@@ -5,6 +5,7 @@ import { Gift, Percent, ShoppingBag, WalletMinimal } from "lucide-react"
 import blogData from "../../assets/Data/Blogs.json";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import BlogCard from "../ui/Cards/BlogCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -50,10 +51,80 @@ const Blogs = () => {
             >
               {blogData.map((blog) => (
                 <SwiperSlide key={blog.id}>
-                  Blog Card
+                  <BlogCard
+                    id={blog.id}
+                    image={blog.image}
+                    title={blog.title}
+                    date={blog.date}
+                    category={blog.category}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>
+          </div>
+
+          {/* Features Row */}
+          <div className="border-t border-[#dddca9]">
+            <div
+              ref={featureRef}
+              className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-14 py-16"
+            >
+              <div className="item centered-row gap-3 lg:px-8">
+                <Gift size={50} />
+
+                <div className="content">
+                  <h4 className="text-lg font-semibold text-heading">
+                    Reward program
+                  </h4>
+
+                  <span className="text-gray-500">
+                    Earn points for every purchase
+                  </span>
+                </div>
+              </div>
+
+              <div className="item centered-row gap-3 lg:px-8">
+                <Percent size={50} />
+
+                <div className="content">
+                  <h4 className="text-lg font-semibold text-heading">
+                    Fast shipping
+                  </h4>
+
+                  <span className="text-gray-500">
+                    Get your order delivered quickly
+                  </span>
+                </div>
+              </div>
+
+              <div className="item centered-row gap-3 lg:px-8">
+                <ShoppingBag size={50} />
+
+                <div className="content">
+                  <h4 className="text-lg font-semibold text-heading">
+                    Special discount
+                  </h4>
+
+                  <span className="text-gray-500">
+                    Enjoy exclusive savings on every order
+                  </span>
+                </div>
+              </div>
+
+              <div className="item centered-row gap-3 lg:px-8">
+                <WalletMinimal size={50} />
+
+                <div className="content">
+                  <h4 className="text-lg font-semibold text-heading">
+                    Great Prices
+                  </h4>
+
+                  <span className="text-gray-500">
+                    Get the best value for your money
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
