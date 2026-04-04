@@ -14,6 +14,7 @@ import Checkout from './pages/Checkout'
 import ShopDetails from './pages/ShopDetails'
 import TeamDetails from './pages/TeamDetails'
 import BlogDetails from './pages/BlogDetails'
+import ScrollToTop from './components/ui/ScrollToTop'
 
 
 
@@ -56,6 +57,7 @@ const App = () => {
           </div>
           <Footer />
         </div>
+        <ScrollToTop />
       </div>
     </>
   )
