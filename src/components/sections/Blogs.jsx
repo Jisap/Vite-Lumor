@@ -37,7 +37,7 @@ const Blogs = () => {
         y: 60,
         opacity: 0,
         duration: 1.2,
-        stagger: 0.2, // Added stagger for a better look
+        stagger: 0.2,
         ease: "power3.out",
         scrollTrigger: {
           trigger: blogRef.current,

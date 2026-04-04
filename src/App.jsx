@@ -13,6 +13,7 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import ShopDetails from './pages/ShopDetails'
 import TeamDetails from './pages/TeamDetails'
+import BlogDetails from './pages/BlogDetails'
 
 
 
@@ -50,6 +51,7 @@ const App = () => {
               <Route path='/checkout' element={<Checkout />} />
               <Route path='/product/:id' element={<ShopDetails />} />
               <Route path='/team/:id' element={<TeamDetails />} />
+              <Route path='/blog/:id' element={<BlogDetails />} />
             </Routes>
           </div>
           <Footer />
