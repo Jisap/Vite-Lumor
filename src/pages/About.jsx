@@ -107,8 +107,18 @@ const About = () => {
         </div>
       </div>
 
-      <div ref={galleryRef} className="image-gallery py-[8%] bg-light-yellow">
-        <GallerySlide galleryData={gallery} />
+      <div ref={galleryRef} className="image-gallery py-[4%] bg-light-yellow">
+        <div className="container mx-auto py-[4%] px-4">
+          <span className="title-span">Our Gallery</span>
+
+          <h2 className="heading-1">
+            Work Examples
+          </h2>
+        </div>
+
+        <div className="container mx-auto px-4 pb-[4%] relative gallery-slider">
+          <GallerySlide galleryData={gallery} />
+        </div>
       </div>
     </>
   )
