@@ -49,7 +49,7 @@ const GallerySlide = ({ galleryData }) => {
           >
             <div
               className="gallery-item h-125 relative overflow-hidden group cursor-pointer"
-              onClick={() => navigate(`gallery/${item.id}`)}
+              onClick={() => navigate(`/gallery/${item.id}`)}
             >
               <img
                 src={item.image1}

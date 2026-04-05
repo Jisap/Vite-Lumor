@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from './components/layout/Navbar/Navbar'
 
 import Footer from './components/layout/Footer/Footer'
@@ -16,6 +16,7 @@ import TeamDetails from './pages/TeamDetails'
 import BlogDetails from './pages/BlogDetails'
 import ScrollToTop from './components/ui/ScrollToTop'
 import About from './pages/About'
+import GalleryDetails from './pages/GalleryDetails'
 
 
 
@@ -24,20 +25,30 @@ const App = () => {
 
   const smootherWrapperRef = useRef(null);
   const smootherContentRef = useRef(null);
+  const smoother = useRef(null);
+  const location = useLocation();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother);  // Plugin de GSAP para scroll suave
-    const smoother = ScrollSmoother.create({             // Creación del scroll suave
+    smoother.current = ScrollSmoother.create({             // Creación del scroll suave
       wrapper: smootherWrapperRef.current,
       content: smootherContentRef.current,
       smooth: 1.8,                                       // Suavidad del scroll
       effects: true,                                     // Efectos de scroll
     });
     return () => {
-      smoother && smoother.kill();                       // Limpieza del scroll suave
+      smoother.current && smoother.current.kill();       // Limpieza del scroll suave
       ScrollTrigger.getAll().forEach(t => t.kill());     // Limpieza de los triggers
     }
   }, [])
+
+  // Resetear scroll y refrescar triggers al cambiar de página
+  useEffect(() => {
+    if (smoother.current) {
+      smoother.current.scrollTop(0);
+      ScrollTrigger.refresh();
+    }
+  }, [location]);
 
   return (
     <>
@@ -55,6 +66,7 @@ const App = () => {
               <Route path='/team/:id' element={<TeamDetails />} />
               <Route path='/blog/:id' element={<BlogDetails />} />
               <Route path='/about' element={<About />} />
+              <Route path='/gallery/:id' element={<GalleryDetails />} />
             </Routes>
           </div>
           <Footer />
