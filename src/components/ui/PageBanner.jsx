@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
-import sectionBanner from "/images/section-banner.jpg"
+const sectionBanner = "/images/section-banner.jpg"
 
 
 

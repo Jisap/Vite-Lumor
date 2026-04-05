@@ -3,13 +3,13 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import MainBtn from '../ui/Buttons/MainBtn'
 import FeatureCard from '../ui/Cards/FeatureCard'
-import featureImage1 from "/images/Index/Features/feature-image-01.jpg"
-import featureImage2 from "/images/Index/Features/feature-image-02.jpg"
-import featureImage3 from "/images/Index/Features/feature-image-03.jpg"
-import featureImage4 from "/images/Index/Features/feature-image-04.jpg"
-import featureImage5 from "/images/Index/Features/feature-image-05.jpg"
-import featureImage6 from "/images/Index/Features/feature-image-06.jpg"
-import featureImage7 from "/images/Index/Features/feature-image-07.jpg"
+const featureImage1 = "/images/Index/Features/feature-image-01.jpg"
+const featureImage2 = "/images/Index/Features/feature-image-02.jpg"
+const featureImage3 = "/images/Index/Features/feature-image-03.jpg"
+const featureImage4 = "/images/Index/Features/feature-image-04.jpg"
+const featureImage5 = "/images/Index/Features/feature-image-05.jpg"
+const featureImage6 = "/images/Index/Features/feature-image-06.jpg"
+const featureImage7 = "/images/Index/Features/feature-image-07.jpg"
 
 import { Bath, BedDouble, ChefHat, Flame, Lightbulb, Palette, Sofa, Square } from 'lucide-react'
 

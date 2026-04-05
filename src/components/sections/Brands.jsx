@@ -2,12 +2,12 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import client1 from "/images/Index/Brand/client-1-copyright.webp";
-import client2 from "/images/Index/Brand/client-2-copyright.webp";
-import client3 from "/images/Index/Brand/client-3-copyright.webp";
-import client4 from "/images/Index/Brand/client-4-copyright.webp";
-import client5 from "/images/Index/Brand/client-5-copyright.webp";
-import client6 from "/images/Index/Brand/client-6-copyright.webp";
+const client1 = "/images/Index/Brand/client-1-copyright.webp";
+const client2 = "/images/Index/Brand/client-2-copyright.webp";
+const client3 = "/images/Index/Brand/client-3-copyright.webp";
+const client4 = "/images/Index/Brand/client-4-copyright.webp";
+const client5 = "/images/Index/Brand/client-5-copyright.webp";
+const client6 = "/images/Index/Brand/client-6-copyright.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 

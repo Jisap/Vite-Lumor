@@ -5,9 +5,9 @@ import "swiper/css/navigation"
 import "swiper/css/pagination"
 import "swiper/css/effect-fade"
 
-import slide1 from "/images/Index/Hero/main-slider-01.jpg"
-import slide2 from "/images/Index/Hero/main-slider-02.jpg"
-import slide3 from "/images/Index/Hero/main-slider-03.jpg"
+const slide1 = "/images/Index/Hero/main-slider-01.jpg"
+const slide2 = "/images/Index/Hero/main-slider-02.jpg"
+const slide3 = "/images/Index/Hero/main-slider-03.jpg"
 import MainBtn from "../ui/Buttons/MainBtn"
 import { ChevronLeft, ChevronRight, Dribbble, Facebook, Instagram, Twitter } from "lucide-react"
 

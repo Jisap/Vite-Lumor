@@ -59,6 +59,42 @@ const About = () => {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const q = gsap.utils.selector(galleryRef);
+
+      // Animación del encabezado (Título y Subtítulo)
+      gsap.from(q(".title-span, .heading-1"), {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        stagger: 0.3,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: galleryRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Animación de los slides individuales
+      gsap.from(q(".swiper-slide"), {
+        opacity: 0,
+        y: 60,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".gallery-slider"),
+          start: "top 75%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    }, galleryRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
       <PageBanner
@@ -107,7 +143,7 @@ const About = () => {
         </div>
       </div>
 
-      <div ref={galleryRef} className="image-gallery py-[4%] bg-light-yellow">
+      <div ref={galleryRef} className="image-gallery gallery-section py-[4%] bg-light-yellow">
         <div className="container mx-auto py-[4%] px-4">
           <span className="title-span">Our Gallery</span>
 

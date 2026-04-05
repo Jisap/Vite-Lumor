@@ -8,10 +8,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useParams } from "react-router-dom";
 
-import gallery1 from "../../public/images/Index/Blogs/gallery-image-01.jpg"
-import gallery2 from "../../public/images/Index/Blogs/gallery-image-02.jpg"
-import post from "../../public/images/Index/Blogs/gallery-main.jpg"
-import author from "../../public/images/Index/Blogs/author.png"
+const gallery1 = "/images/Index/Blogs/gallery-image-01.jpg"
+const gallery2 = "/images/Index/Blogs/gallery-image-02.jpg"
+const post = "/images/Index/Blogs/gallery-main.jpg"
+const author = "/images/Index/Blogs/author.png"
 import { Quote } from "lucide-react"
 
 import blogData from "../assets/Data/Blogs.json"

@@ -2,8 +2,8 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Play } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
-import collectionImage1 from "/images/Index/Collection/collection-image-01.jpg"
-import collectionImage2 from "/images/Index/Collection/collection-image-02.jpg"
+const collectionImage1 = "/images/Index/Collection/collection-image-01.jpg"
+const collectionImage2 = "/images/Index/Collection/collection-image-02.jpg"
 import { Link } from "react-router-dom"
 
 
