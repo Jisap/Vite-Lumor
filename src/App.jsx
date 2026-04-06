@@ -17,6 +17,7 @@ import BlogDetails from './pages/BlogDetails'
 import ScrollToTop from './components/ui/ScrollToTop'
 import About from './pages/About'
 import GalleryDetails from './pages/GalleryDetails'
+import Shop from './pages/Shop'
 
 
 
@@ -67,6 +68,7 @@ const App = () => {
               <Route path='/blog/:id' element={<BlogDetails />} />
               <Route path='/about' element={<About />} />
               <Route path='/gallery/:id' element={<GalleryDetails />} />
+              <Route path='/shop' element={<Shop />} />
             </Routes>
           </div>
           <Footer />

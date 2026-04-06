@@ -210,7 +210,7 @@ const About = () => {
           </p>
 
           <h3 className="text-5xl font-bold">
-            {startCount && <CountUp end={25} duration={2} />}
+            {startCount && <CountUp end={25} duration={2} />} +
           </h3>
         </div>
 

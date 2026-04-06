@@ -203,6 +203,7 @@ const GalleryDetails = () => {
                   style={{ opacity: 1 }}
                   loading="eager"
                 />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent pointer-events-none" />
 
                 {gallery.imageCaptions?.[activeThumb] && (
