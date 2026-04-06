@@ -218,6 +218,132 @@ const GalleryDetails = () => {
               </ul>
             </div>
           )}
+
+          <div className={`gallery-right ${(gallery.Client || gallery.Date || gallery.Year || gallery.Author)
+            ? "w-full lg:w-[70%]"
+            : "w-full lg:w-full flex justify-center flex-col"
+            }`}
+          >
+            <div className="main-image w-full relative">
+              {[gallery.image1, gallery.image2, gallery.image3, gallery.image4, gallery.swiperimage1, gallery.swiperimage2, gallery.swiperimage3].filter(Boolean).length > 1 && (
+                <div className="absolute -top-16 right-4 flex gap-4 z-10">
+                  <button className="gallery-prev w-12 h-12 border items-center justify-center hover:bg-black hover:text-white transition-all duration-300 cursor-pointer sm:flex hidden">
+                    <ArrowLeft size={20} />
+                  </button>
+
+                  <button className="gallery-next w-12 h-12 border items-center justify-center hover:bg-black hover:text-white transition-all duration-300 cursor-pointer sm:flex hidden">
+                    <ArrowRight size={20} />
+                  </button>
+                </div>
+              )}
+
+              {(() => {
+                const galleryImages = [
+                  gallery.image1,
+                  gallery.image2,
+                  gallery.image3,
+                  gallery.image4,
+                  gallery.swiperimage1,
+                  gallery.swiperimage2,
+                  gallery.swiperimage3
+                ].filter(Boolean); // Filtro para eliminar valores undefined o null -> se evita renderizaciones de imagenes que no existen
+
+                if (galleryImages.length > 1) {
+                  return (
+                    <Swiper
+                      modules={[Navigation]}
+                      spaceBetween={10}
+                      slidesPerView={1}
+                      className="rounded h-150 lg:h-200"
+                      navigation={{
+                        prevEl: ".gallery-prev",
+                        nextEl: ".gallery-next",
+                      }}
+                    >
+                      {galleryImages.map((img, idx) => (
+                        <SwiperSlide key={idx}>
+                          <img
+                            src={img}
+                            alt={`gallery-${idx}`}
+                            className="w-full h-full object-cover rounded"
+                          />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  );
+                } else {
+                  return (
+                    <img
+                      src={mainImage}
+                      alt={gallery.title}
+                      className="w-full h-full object-cover rounded"
+                    />
+                  );
+                }
+              })()}
+            </div>
+
+            <h3 className="text-3xl lg:text-4xl font-semibold pt-8 pb-5">
+              Wood Sliding Doors
+            </h3>
+
+            <p className="text-paragraph pb-8">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque, quasi molestias accusantium cupiditate, animi sit delectus cum nostrum reprehenderit in soluta reiciendis, ut minima voluptatem ad labore magnam iure quis.
+            </p>
+
+            <div className="centered-row justify-between flex-col lg:flex-row gap-3 w-full h-auto lg:h-90">
+              <div className="image group overflow-hidden rounded-sm w-full h-full">
+                <img
+                  src={gallery.image2}
+                  alt="gallery image"
+                  className="section-image group-hover:scale-110 transition-all duration-300"
+                />
+              </div>
+
+              <div className="image group overflow-hidden rounded-sm w-full h-full">
+                <img
+                  src={gallery.image3}
+                  alt="gallery image"
+                  className="section-image group-hover:scale-110 transition-all duration-300"
+                />
+              </div>
+            </div>
+
+            <p className="text-pragraph pb-8 pt-8">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique, perferendis assumenda suscipit porro dicta harum facere, eum aliquam maxime reprehenderit iste omnis libero nemo provident neque eaque cumque quia! Obcaecati.
+            </p>
+
+            <div className="centered-row justify-between flex-col xl:flex-row item-start! gap-10">
+              <div className="w-full xl:w-1/2">
+                <p className="text-paragraph pb-8">
+                  Interior design is the art and science of enhancing the interior of a building to achieve a healthier and more aesthetically pleasing environment for the people using the space.
+                </p>
+
+                <h4 className="text-2xl font-medium text-heading pb-3">
+                  Elegant and Functional Spaces
+                </h4>
+
+                <p className="text-paragraph pb-8">
+                  A well-designed interior balances beauty with practicality. From modern living rooms to cozy bedrooms, thoughtful layouts and carefully selected materials help create spaces thar feel thar fell welcoming, organized, and timeless.
+                </p>
+
+                <h4 className="text-2xl font-medium text-heading pb-3">
+                  Design that Reflects Your Style
+                </h4>
+
+                <p className="text-paragraph pb-8">
+                  Interior design allows you to express your unique taste through furniture, decor, lighting, and color palettes. Whether it's minimal, comtemporary, or classic, the right design choices bring harmony and comfort to every corner of your home.
+                </p>
+              </div>
+
+              <div className="w-full xl:w-1/2">
+                <img
+                  src={gallery.image4}
+                  alt="interior design"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
