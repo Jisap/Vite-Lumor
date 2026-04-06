@@ -167,6 +167,24 @@ const Shop = () => {
             </main>
 
             {/* sidebar */}
+            <aside className='w-full lg:w-1/4 space-y-8 order-2 lg:order-1'>
+              {/* Search */}
+              <div className='bg-white p-6 rounded-sm shadow-sm sidebar-box'>
+                <h3 className='text-xl font-medium mb-4 sidebar-title'>Search</h3>
+                <div className='relative sidebar-content'>
+                  <input
+                    type="text"
+                    placeholder='Search Products...'
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className='w-full border p-2 pl-10 rounded-md outline-none focus:border-primary'
+                  />
+
+                  <Search className='absolute left-3 top-2.5 text-gray-400' size={18} />
+                </div>
+              </div>
+
+              {/* Categories */}
+            </aside>
           </div>
         </div>
       </div>
