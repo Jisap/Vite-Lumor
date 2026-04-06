@@ -9,6 +9,8 @@ import gallery from "../assets/Data/GalleryData.json"
 import CountUp from "react-countup"
 import Team from "../components/sections/Teams"
 import GallerySlide from "../components/ui/GallerySlide"
+import Banner from "../components/sections/Banner"
+import Teams from "../components/sections/Teams"
 
 const aboutImg1 = "/images/AboutPage/about-image-01.jpg";
 const aboutImg2 = "/images/AboutPage/about-image-02.jpg";
@@ -20,6 +22,8 @@ const About = () => {
 
   const aboutRef = useRef();
   const galleryRef = useRef();
+  const countRef = useRef();
+  const [startCount, setStartCount] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -95,6 +99,26 @@ const About = () => {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".counter-item", {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: countRef.current,
+          start: "top 85%",
+          once: true,
+          onEnter: () => setStartCount(true),
+        }
+      });
+    }, countRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
       <PageBanner
@@ -156,6 +180,52 @@ const About = () => {
           <GallerySlide galleryData={gallery} />
         </div>
       </div>
+
+      <Banner />
+
+      <div ref={countRef} className="container pb-[8%] mx-auto px-4 gap-14 section-container grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 text-center">
+        <div className="counter-item">
+          <p className="text-lg text-gray-600 mb-2">
+            Offices
+          </p>
+
+          <h3 className="text-5xl font-bold">
+            {startCount && <CountUp end={90} duration={2} />}
+          </h3>
+        </div>
+
+        <div className="counter-item">
+          <p className="text-lg text-gray-600 mb-2">
+            Clients
+          </p>
+
+          <h3 className="text-5xl font-bold">
+            {startCount && <CountUp end={2548} duration={2} />}
+          </h3>
+        </div>
+
+        <div className="counter-item">
+          <p className="text-lg text-gray-600 mb-2">
+            Years
+          </p>
+
+          <h3 className="text-5xl font-bold">
+            {startCount && <CountUp end={25} duration={2} />}
+          </h3>
+        </div>
+
+        <div className="counter-item">
+          <p className="text-lg text-gray-600 mb-2">
+            Projects
+          </p>
+
+          <h3 className="text-5xl font-bold">
+            {startCount && <CountUp end={256} duration={2} />}
+          </h3>
+        </div>
+      </div>
+
+      <Teams />
     </>
   )
 }
