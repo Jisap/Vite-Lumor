@@ -22,26 +22,26 @@ const GalleryDetails = () => {
   const [mainImage, setMainImage] = useState(gallery?.image1);
   const galleryRef = useRef(null);
 
-  useEffect(() => {
-    if (!gallery) return;
-    
-    const ctx = gsap.context(() => {
-      gsap.from(".animate-content > *", {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".animate-content",
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
-      });
-    }, galleryRef);
+  // useEffect(() => {
+  //   if (!gallery) return;
 
-    return () => ctx.revert();
-  }, [id, gallery]);
+  //   const ctx = gsap.context(() => {
+  //     gsap.from(".animate-content > *", {
+  //       y: 40,
+  //       opacity: 0,
+  //       duration: 1,
+  //       stagger: 0.2,
+  //       ease: "power3.out",
+  //       scrollTrigger: {
+  //         trigger: ".animate-content",
+  //         start: "top 85%",
+  //         toggleActions: "play none none reverse"
+  //       }
+  //     });
+  //   }, galleryRef);
+
+  //   return () => ctx.revert();
+  // }, [id, gallery]);
 
   useEffect(() => {
     if (gallery) {
@@ -53,15 +53,15 @@ const GalleryDetails = () => {
     return <p className="text-center mt-10">Gallery not found</p>
   }
 
-  const additionalImages = [
-    gallery.swiperimage1, 
-    gallery.swiperimage2, 
-    gallery.swiperimage3,
-    gallery.image1,
-    gallery.image2,
-    gallery.image3,
-    gallery.image4
-  ].filter(Boolean);
+  // const additionalImages = [
+  //   gallery.swiperimage1, 
+  //   gallery.swiperimage2, 
+  //   gallery.swiperimage3,
+  //   gallery.image1,
+  //   gallery.image2,
+  //   gallery.image3,
+  //   gallery.image4
+  // ].filter(Boolean);
 
   return (
     <>
@@ -71,7 +71,8 @@ const GalleryDetails = () => {
         productName={gallery.title}
       />
 
-      <section ref={galleryRef} className="container mx-auto py-[8%] px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      {/* Propuesta 1 */}
+      {/* <section ref={galleryRef} className="container mx-auto py-[8%] px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         <div className="space-y-6">
           <div className="relative overflow-hidden aspect-4/5">
             <img 
@@ -175,7 +176,50 @@ const GalleryDetails = () => {
                </Swiper>
             </div>
          </section>
-      )}
+      )} */}
+
+      {/* Propuesta 2 */}
+      <div className="container mx-auto px-4 py-[8%]">
+        <h3 className="heading-1 mb-14">{gallery.title}</h3>
+
+        <div className="section-container p-0! gap-10 lg:gap-14">
+          {(gallery.Client || gallery.Date || gallery.Year || gallery.Author) && (
+            <div className="w-full lg:w-[30%] lg:sticky top-[8em] left-0 gallery-left">
+              <ul className="lg:max-w-60 space-y-4">
+                {gallery.Client && (
+                  <li className="centered-row justify-between">
+                    <span className="text-heading text-lg font-semibold">Client</span>
+                    <span className="text-lg text-muted font-light">{gallery.Client}</span>
+                  </li>
+                )}
+
+                {(gallery.Date || gallery.Year) && (
+                  <li className="centered-row justify-between">
+                    <span className="text-heading text-lg font-semibold">
+                      {gallery.Date && gallery.Year ? "Date & Year" : gallery.Date ? "Date" : "Year"}
+                    </span>
+                    <span className="text-lg text-muted font-light">
+                      {gallery.Date && gallery.Year
+                        ? `${gallery.Date} / ${gallery.Year}`
+                        : gallery.Date
+                          ? gallery.Date
+                          : gallery.Year
+                      }
+                    </span>
+                  </li>
+                )}
+
+                {gallery.Author && (
+                  <li className="centered-row justify-between">
+                    <span className="text-heading text-lg font-semibold">Author</span>
+                    <h5 className="text-lg text-muted font-light">{gallery.Author}</h5>
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
     </>
   )
 }
