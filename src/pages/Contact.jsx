@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
   const contactRef = useRef();
+  const mapRef = useRef();
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
 
   useEffect(() => {
@@ -45,6 +46,53 @@ const Contact = () => {
         }
       });
     }, contactRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // --- Map animation (clip-path curtain reveal) ---
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    const ctx = gsap.context(() => {
+
+      // Cortina que se descorre hacia arriba
+      gsap.from(mapRef.current, {
+        clipPath: "inset(100% 0% 0% 0%)",
+        duration: 1.2,
+        ease: "power3.inOut",
+        scrollTrigger: {
+          trigger: mapRef.current,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Overlay que desvanece mientras la cortina sube
+      gsap.to(".map-overlay", {
+        opacity: 0,
+        duration: 1.4,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: mapRef.current,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Leve zoom-out del iframe al aparecer
+      gsap.from(".map-iframe", {
+        scale: 1.06,
+        duration: 1.4,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: mapRef.current,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+    }, mapRef);
 
     return () => ctx.revert();
   }, []);
@@ -174,6 +222,21 @@ const Contact = () => {
             </div>
           </form>
         </div>
+      </div>
+
+      <div ref={mapRef} className='relative w-full h-100 sm:h-150 lg:h-180 overflow-hidden'>
+        {/* Overlay de color para el efecto de desvanecimiento */}
+        <div className='map-overlay absolute inset-0 bg-light-yellow pointer-events-none z-10' />
+
+        <iframe
+          className='map-iframe'
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d232559.02673210207!2d-3.844343464188269!3d40.438098610297125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422997800a3c81%3A0xc436dec1618c2269!2sMadrid!5e1!3m2!1ses!2ses!4v1775575603827!5m2!1ses!2ses"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+        />
       </div>
     </>
   )
