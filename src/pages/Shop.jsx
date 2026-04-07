@@ -208,7 +208,52 @@ const Shop = () => {
               </div>
 
               {/* Price filter */}
+              <div className='bg-white p-6 rounded-sm shadow-sm sidebar-box'>
+                <h3 className='text-xl font-medium mb-4 sidebar-title'>
+                  Price
+                </h3>
 
+                <div className='sidebar-content'>
+                  <input
+                    type="range"
+                    min="0"
+                    max="300"
+                    value={priceRange}
+                    onChange={(e) => setPriceRange(e.target.value)}
+                    className='w-full accent-primary'
+                  />
+
+                  <div className='flex justify-between text-sm mt-2 font-medium'>
+                    <span>$0</span>
+                    <span>Max: ${priceRange}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tag Filter */}
+              <div className='bg-white p-6 rounded-sm shadow-sm sidebar-box'>
+                <h3 className='text-xl font-medium mb-4 sidebar-title'>
+                  Tags
+                </h3>
+
+                <div className='flex flex-wrap gap-2 sidebar-content'>
+                  {tags.map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => setSelectedTag(tag)}
+                      className={`
+                        text-sm border px-3 py-1 transition-all duration-300 cursor-pointer
+                        ${selectedTag === tag
+                          ? "bg-primary text-white border-primary"
+                          : "border-gray-200 text-gray-500 hover:border-primary hover:text-primary"
+                        }
+                      `}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </aside>
           </div>
         </div>
