@@ -19,6 +19,7 @@ import About from './pages/About'
 import GalleryDetails from './pages/GalleryDetails'
 import Shop from './pages/Shop'
 import Blogs from './pages/Blogs'
+import Contact from './pages/Contact'
 
 
 
@@ -71,6 +72,7 @@ const App = () => {
               <Route path='/gallery/:id' element={<GalleryDetails />} />
               <Route path='/shop' element={<Shop />} />
               <Route path='/blogs' element={<Blogs />} />
+              <Route path="/contact" element={<Contact />} />
             </Routes>
           </div>
           <Footer />
