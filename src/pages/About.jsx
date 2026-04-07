@@ -7,7 +7,6 @@ import MainBtn from "../components/ui/Buttons/MainBtn"
 
 import gallery from "../assets/Data/GalleryData.json"
 import CountUp from "react-countup"
-import Team from "../components/sections/Teams"
 import GallerySlide from "../components/ui/GallerySlide"
 import Banner from "../components/sections/Banner"
 import Teams from "../components/sections/Teams"
