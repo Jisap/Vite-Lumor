@@ -47,6 +47,30 @@ const Blogs = () => {
                 ))}
               </div>
             </div>
+
+            <div>
+              <h3 className='text-xl font-semibold mb-6 title'>
+                Tags
+              </h3>
+
+              <ul className='flex flex-wrap gap-3'>
+                <li className='border px-4 py-1 text-sm hover:bg-black hover:text-white cursor-pointer transition-all duration-300 tag-item'>
+                  Interior
+                </li>
+                <li className='border px-4 py-1 text-sm hover:bg-black hover:text-white cursor-pointer transition-all duration-300 tag-item'>
+                  Furniture
+                </li>
+                <li className='border px-4 py-1 text-sm hover:bg-black hover:text-white cursor-pointer transition-all duration-300 tag-item'>
+                  Design
+                </li>
+                <li className='border px-4 py-1 text-sm hover:bg-black hover:text-white cursor-pointer transition-all duration-300 tag-item'>
+                  Architecture
+                </li>
+                <li className='border px-4 py-1 text-sm hover:bg-black hover:text-white cursor-pointer transition-all duration-300 tag-item'>
+                  Modern
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
