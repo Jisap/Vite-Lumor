@@ -184,6 +184,31 @@ const Shop = () => {
               </div>
 
               {/* Categories */}
+              <div className='bg-white p-6 rounded-sm shadow-sm sidebar-box'>
+                <h3 className='text-xl font-medium mb-4 sidebar-title'>
+                  Categories
+                </h3>
+
+                <ul className='space-y-2 sidebar-content'>
+                  {allCategories.map(cat => (
+                    <li key={cat}>
+                      <button
+                        onClick={() => setSelectedCategory(cat)}
+                        className={`cursor-pointer transition-colors
+                           ${selectedCategory === cat
+                            ? "text-primary font-bold"
+                            : "text-gray-600 hover:text-black"
+                          }`}
+                      >
+                        {cat}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Price filter */}
+
             </aside>
           </div>
         </div>
