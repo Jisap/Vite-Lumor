@@ -39,7 +39,7 @@ const Shop = () => {
       const matchesCategory = selectedCategory === "All" || product.categories.includes(selectedCategory);
       const matchesPrice = product.price <= priceRange;
 
-      const matchesTag = selectedTag === "All" || product.categories.includes(selectedTag);
+      const matchesTag = selectedTag === "All" || (product.tags && product.tags.includes(selectedTag));
 
       return matchesSearch && matchesCategory && matchesTag && matchesPrice;
     });
@@ -64,7 +64,127 @@ const Shop = () => {
   const handlePageChange = (page) => {                                                   // Handle page change
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+  };
+
+  const sidebarRef = useRef(null);
+  const mainRef = useRef(null);
+  const shopRef = useRef(null);
+
+  // --- Sidebar animations (slide in from left) ---
+  useEffect(() => {
+    if (!sidebarRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const q = gsap.utils.selector(sidebarRef);
+
+      gsap.from(q(".sidebar-box"), {
+        x: -60,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.18,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sidebarRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      gsap.from(q(".sidebar-title"), {
+        x: -30,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        delay: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sidebarRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      gsap.from(q(".sidebar-content"), {
+        x: -20,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        delay: 0.35,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sidebarRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }, sidebarRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // --- Main content animations ---
+  useEffect(() => {
+    if (!mainRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const q = gsap.utils.selector(mainRef);
+
+      // Top bar (results count + sort dropdown) — slides down
+      gsap.from(q(".top-bar"), {
+        y: -30,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: mainRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Product cards — stagger up
+      gsap.from(q(".product-grid > *"), {
+        y: 60,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".product-grid"),
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Pagination — fade + slide up
+      gsap.from(q(".pagination"), {
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".pagination"),
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Empty state — scale bounce
+      gsap.from(q(".empty-state"), {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.6,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: q(".empty-state"),
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }, mainRef);
+
+    return () => ctx.revert();
+  }, [currentProducts]);
 
   return (
     <>
@@ -78,7 +198,7 @@ const Shop = () => {
           <div className='flex flex-col lg:flex-row gap-8'>
 
             {/* Main content */}
-            <main className='w-full lg:w-3/4 order-1 lg:order-2'>
+            <main ref={mainRef} className='w-full lg:w-3/4 order-1 lg:order-2'>
               <div className='flex flex-col sm:flex-row justify-between items-center mb-8 gap-4 top-bar'>
                 <p className='text-gray-500 italic'>
                   Showing {products.length > 0 ? indexOfFirstProduct + 1 : 0} - {Math.min(indexOfLastProduct, products.length)} of {products.length} results
@@ -167,7 +287,7 @@ const Shop = () => {
             </main>
 
             {/* sidebar */}
-            <aside className='w-full lg:w-1/4 space-y-8 order-2 lg:order-1'>
+            <aside ref={sidebarRef} className='w-full lg:w-1/4 space-y-8 order-2 lg:order-1'>
               {/* Search */}
               <div className='bg-white p-6 rounded-sm shadow-sm sidebar-box'>
                 <h3 className='text-xl font-medium mb-4 sidebar-title'>Search</h3>

@@ -9,7 +9,8 @@
         "image5": "/images/Products/product-image-05.jpg",
         "price": 180,
         "oldprice": "$210",
-        "categories": "Furniture"
+        "categories": "Furniture",
+        "tags": "Stock,Simple"
     },
     {
         "id": 2,
@@ -20,7 +21,8 @@
         "image4": "/images/Products/product-image-09.jpg",
         "image5": "/images/Products/product-image-10.jpg",
         "price": 30,
-        "categories": "Furniture"
+        "categories": "Furniture",
+        "tags": "Item"
     },
     {
         "id": 3,
@@ -31,7 +33,8 @@
         "image4": "/images/Products/product-image-14.jpg",
         "image5": "/images/Products/product-image-15.jpg",
         "price": 30,
-        "categories": "Furniture"
+        "categories": "Furniture",
+        "tags": "Stock,Smart"
     },
     {
         "id": 4,
@@ -43,7 +46,8 @@
         "image5": "/images/Products/product-image-20.jpg",
         "price": 30,
         "oldprice": "$60",
-        "categories": "Furniture"
+        "categories": "Furniture",
+        "tags": "Discount"
     },
     {
         "id": 6,
@@ -54,7 +58,8 @@
         "image4": "/images/Products/product-image-24.jpg",
         "image5": "/images/Products/product-image-25.jpg",
         "price": 15,
-        "categories": "Furniture,Decor"
+        "categories": "Furniture,Decor",
+        "tags": "Item,Simple"
     },
     {
         "id": 7,
@@ -65,7 +70,8 @@
         "image4": "/images/Products/product-image-29.jpg",
         "image5": "/images/Products/product-image-30.jpg",
         "price": 132,
-        "categories": "Furniture,Decor"
+        "categories": "Furniture,Decor",
+        "tags": "Stock"
     },
     {
         "id": 9,
@@ -76,7 +82,8 @@
         "image4": "/images/Products/product-image-34.jpg",
         "image5": "/images/Products/product-image-35.jpg",
         "price": 200,
-        "categories": "Furniture,Decor"
+        "categories": "Furniture,Decor",
+        "tags": "Smart"
     },
     {
         "id": 10,
@@ -87,7 +94,8 @@
         "image4": "/images/Products/product-image-39.jpg",
         "image5": "/images/Products/product-image-40.jpg",
         "price": 9,
-        "categories": "Decor"
+        "categories": "Decor",
+        "tags": "Item,Simple"
     },
     {
         "id": 11,
@@ -99,7 +107,8 @@
         "image5": "/images/Products/product-image-45.jpg",
         "price": 130,
         "oldprice": "$150",
-        "categories": "Furniture"
+        "categories": "Furniture",
+        "tags": "Discount,Stock"
     },
     {
         "id": 12,
@@ -110,7 +119,8 @@
         "image4": "/images/Products/product-image-49.jpg",
         "image5": "/images/Products/product-image-50.jpg",
         "price": 14,
-        "categories": "Furniture"
+        "categories": "Furniture",
+        "tags": "Simple"
     },
     {
         "id": 13,
@@ -121,7 +131,8 @@
         "image4": "/images/Products/product-image-54.jpg",
         "image5": "/images/Products/product-image-55.jpg",
         "price": 300,
-        "categories": "Furniture,Decor"
+        "categories": "Furniture,Decor",
+        "tags": "Smart,Item"
     },
     {
         "id": 14,
@@ -132,7 +143,8 @@
         "image4": "/images/Products/product-image-59.jpg",
         "image5": "/images/Products/product-image-60.jpg",
         "price": 30,
-        "categories": "Furniture"
+        "categories": "Furniture",
+        "tags": "Stock"
     },
     {
         "id": 15,
@@ -143,7 +155,8 @@
         "image4": "/images/Products/product-image-64.jpg",
         "image5": "/images/Products/product-image-65.jpg",
         "price": 120,
-        "categories": "Furniture"
+        "categories": "Furniture",
+        "tags": "Simple,Item"
     },
     {
         "id": 16,
@@ -154,7 +167,8 @@
         "image4": "/images/Products/product-image-69.jpg",
         "image5": "/images/Products/product-image-70.jpg",
         "price": 80,
-        "categories": "Furniture,Decor"
+        "categories": "Furniture,Decor",
+        "tags": "Smart"
     },
     {
         "id": 17,
@@ -166,7 +180,8 @@
         "image5": "/images/Products/product-image-75.jpg",
         "price": 100,
         "oldprice": "$115",
-        "categories": "Furniture"
+        "categories": "Furniture",
+        "tags": "Discount"
     },
     {
         "id": 18,
@@ -177,7 +192,8 @@
         "image4": "/images/Products/product-image-79.jpg",
         "image5": "/images/Products/product-image-80.jpg",
         "price": 60,
-        "categories": "Furniture"
+        "categories": "Furniture",
+        "tags": "Stock,Simple"
     },
     {
         "id": 19,
@@ -188,7 +204,8 @@
         "image4": "/images/Products/product-image-84.jpg",
         "image5": "/images/Products/product-image-85.jpg",
         "price": 32,
-        "categories": "Furniture"
+        "categories": "Furniture",
+        "tags": "Smart"
     },
     {
         "id": 20,
@@ -199,6 +216,7 @@
         "image4": "/images/Products/product-image-89.jpg",
         "image5": "/images/Products/product-image-90.jpg",
         "price": 100,
-        "categories": "Decor,Furniture"
+        "categories": "Decor,Furniture",
+        "tags": "Item"
     }
 ]
