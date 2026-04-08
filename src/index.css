@@ -325,3 +325,31 @@ h6 {
 .footer-item.links ul li a:hover::after {
     width: 100% !important;
 }
+
+.input-wrapper::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: rgba(194, 193, 193, 0.96);
+    z-index: 1;
+}
+
+.input-wrapper::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 0;
+    background-color: var(--color-heading);
+    transition: all .3s ease-in-out;
+    z-index: 2;
+}
+
+.input-wrapper:hover::before,
+.input-wrapper:focus-within::before {
+    width: 100%;
+}

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const ServiceCard = ({ id, title, image, category }) => {
   return (
     <>
-      <Link to={`service/${id}`} className="service-card block group">
+      <Link to={`/service/${id}`} className="service-card block group">
         <div className='srv-image rounded-full overflow-hidden w-80 h-80 mx-auto mb-8'>
           <img src={image} alt={title} className='section-image group-hover:scale-110 transition duration-300' />
         </div>
