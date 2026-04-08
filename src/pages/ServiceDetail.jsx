@@ -17,9 +17,160 @@ gsap.registerPlugin(ScrollTrigger);
 const ServiceDetail = () => {
   const { id } = useParams();
   const serviceDetailRef = useRef();
+  const contentRef = useRef();
+  const sidebarRef = useRef();
 
   const service = services.find((service) => service.id === Number(id));
 
+  // --- Animación: imagen principal + título + párrafos del contenido ---
+  useEffect(() => {
+    if (!service) return;
+
+    const ctx = gsap.context(() => {
+      // Banner de presentación
+      gsap.from(".animate-banner", {
+        opacity: 0,
+        scale: 1.05,
+        duration: 1.5,
+        ease: "power3.out",
+      });
+
+      // Imagen principal (slide desde abajo con scale)
+      gsap.from(".main-image", {
+        y: 60,
+        opacity: 0,
+        scale: 1.03,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".main-image",
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Título principal
+      gsap.from(".main-title", {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".main-title",
+          start: "top 88%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Párrafos y bloques de texto con stagger
+      gsap.from(".pera", {
+        y: 30,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Imágenes de galería (cortina hacia arriba)
+      gsap.from(".gallery-img", {
+        clipPath: "inset(100% 0% 0% 0%)",
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power3.inOut",
+        scrollTrigger: {
+          trigger: ".gallery",
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Imagen inferior (zoom-out al aparecer)
+      gsap.from(".bottom-image", {
+        scale: 1.06,
+        opacity: 0,
+        duration: 1.4,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".bottom-image",
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }, contentRef);
+
+    return () => ctx.revert();
+  }, [service]);
+
+  // --- Animación: sidebar (formulario + contacto + CTA) ---
+  useEffect(() => {
+    if (!service) return;
+
+    const ctx = gsap.context(() => {
+      const q = gsap.utils.selector(sidebarRef);
+
+      // Sidebar entra desde la derecha
+      gsap.from(sidebarRef.current, {
+        x: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sidebarRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Campos del formulario con stagger
+      gsap.from(q(".input-wrapper, .submit-btn"), {
+        x: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".contact-form")[0],
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Items de contacto
+      gsap.from(q(".contact-item"), {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".contact-item")[0],
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // CTA card (necesita diseño especial)
+      gsap.from(q(".cta-card"), {
+        y: 40,
+        opacity: 0,
+        scale: 0.97,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".cta-card"),
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }, sidebarRef);
+
+    return () => ctx.revert();
+  }, [service]);
 
   if (!service) {
     return (
@@ -43,7 +194,8 @@ const ServiceDetail = () => {
 
         <div ref={serviceDetailRef} className='container mx-auto px-4 py-[8%]'>
           <div className='section-container gap-10 lg:gap-14 items-start!'>
-            <div className='w-full lg:w-[70%] content'>
+            {/* Contenido principal */}
+            <div ref={contentRef} className='w-full lg:w-[70%] content'>
               <img
                 src={service.image}
                 alt={service.title}
@@ -86,7 +238,7 @@ const ServiceDetail = () => {
             </div>
 
             {/* Sidebar */}
-            <div className='w-full lg:w-[30%] bg-white shadow p-5 lg:p-8 rounded-sm lg:sticky h-full top-0 right-0'>
+            <div ref={sidebarRef} className='w-full lg:w-[30%] bg-white shadow p-5 lg:p-8 rounded-sm lg:sticky h-full top-0 right-0'>
               <h4 className='form-title'>Get In Touch</h4>
 
               <form className='space-y-8 mt-10 contact-form'>
@@ -151,7 +303,7 @@ const ServiceDetail = () => {
                 </ul>
               </div>
 
-              <div className="bg-primary text-white p-8 rounded-sm text-center mt-20">
+              <div className="cta-card bg-primary text-white p-8 rounded-sm text-center mt-20">
                 <h4 className="text-2xl font-semibold mb-4">Need Custom Design?</h4>
                 <p className="text-gray-400 mb-8">
                   Let's discuss your next project and bring your vision to life with our expert team.
