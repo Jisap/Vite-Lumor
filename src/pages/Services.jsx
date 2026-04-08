@@ -10,6 +10,8 @@ import ServiceCard from '../components/ui/Cards/ServiceCard';
 
 const aboutImg1 = "/images/AboutPage/about-image-01.jpg"
 const aboutImg2 = "/images/AboutPage/about-image-02.jpg"
+const faqImage1 = "/images/Faqs/faq-image-01.jpg"
+const faqImage2 = "/images/Faqs/faq-image-02.jpg"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,6 +20,8 @@ const Services = () => {
   const aboutRef = useRef();
   const serviceRef = useRef();
   const ctaRef = useRef();
+  const storeRef = useRef();
+  const featureRef = useRef();
 
   // --- Sección About / Intro ---
   useEffect(() => {
@@ -211,7 +215,6 @@ const Services = () => {
         </div>
       </div>
 
-      {/* CTA Section */}
       <div ref={ctaRef} className='bg-primary text-white overflow-hidden'>
         <div className='container py-[5%] mx-auto px-4'>
           {/* Línea decorativa superior */}
@@ -235,6 +238,37 @@ const Services = () => {
           {/* Línea decorativa inferior */}
           <div className='cta-line h-px bg-white/20 mt-10 w-full' />
         </div>
+      </div>
+
+      <div ref={storeRef} className='container py-[8%] mx-auto px-4 section-container items-center! gap-10 lg:gap-14'>
+        <div className='faq-image w-full lg:w-1/2 centered-row sm:flex-row flex-col gap-5 h-auto sm:h-90 xl:h-120'>
+          <img src={faqImage1} alt="faq-image-01" className='section-image rounded-sm' />
+          <img src={faqImage2} alt="faq-image-02" className='section-image rounded-sm' />
+        </div>
+
+        <div className='content w-full lg:w-1/2'>
+          <span className="title-span">Modern Solutions</span>
+
+          <h2 className="heading-1 mb-5">
+            Timeless, quality interior
+            <br />
+            designs
+          </h2>
+
+          <p className="pera-text">
+            We create spaces that are not only beautiful but also functional and comfortable. Our team of experienced designers works closely with clients to understand their needs and preferences, and we create spaces that are tailored to their specific requirements.
+          </p>
+
+          <MainBtn
+            path="/shop"
+            text="Visit Our Online Store"
+            className="bg-black! text-white! w-60!"
+          />
+        </div>
+      </div>
+
+      <div ref={featureRef} className='container py-[8%] mx-auto px-4'>
+
       </div>
     </>
   )
