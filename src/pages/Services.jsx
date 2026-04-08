@@ -147,6 +147,96 @@ const Services = () => {
     return () => ctx.revert();
   }, []);
 
+  // --- Sección Store ---
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const q = gsap.utils.selector(storeRef);
+
+      // Imágenes de la tienda: entran desde la izquierda con stagger
+      gsap.from(q(".faq-image img"), {
+        x: -60,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: storeRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Contenido textual: aparece con stagger vertical
+      gsap.from(q(".store-content > *"), {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".store-content"),
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }, storeRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // --- Sección Features ---
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const q = gsap.utils.selector(featureRef);
+
+      // Heading de la sección
+      gsap.from(q(".feature-heading > *"), {
+        y: 30,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".feature-heading"),
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Cards de features: escala + opacidad con stagger
+      gsap.from(q(".feature-card"), {
+        y: 50,
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.9,
+        stagger: 0.18,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".feature-grid"),
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Iconos: pequeño bounce de entrada
+      gsap.from(q(".feature-icon"), {
+        y: 20,
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.8,
+        stagger: 0.18,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: q(".feature-grid"),
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }, featureRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
       <PageBanner title="Our Services" currentPage="Our Services" />
@@ -244,13 +334,23 @@ const Services = () => {
         </div>
       </div>
 
+      {/* Store Section */}
       <div ref={storeRef} className='container py-[8%] mx-auto px-4 section-container items-center! gap-10 lg:gap-14'>
-        <div className='faq-image w-full lg:w-1/2 centered-row sm:flex-row flex-col gap-5 h-auto sm:h-90 xl:h-120'>
-          <img src={faqImage1} alt="faq-image-01" className='section-image rounded-sm' />
-          <img src={faqImage2} alt="faq-image-02" className='section-image rounded-sm' />
+        {/* Imágenes: dos columnas con alturas escalonadas */}
+        <div className='faq-image w-full lg:w-1/2 flex sm:flex-row flex-col gap-4 items-end'>
+          <img
+            src={faqImage1}
+            alt="faq-image-01"
+            className='section-image rounded-sm w-full sm:w-1/2 sm:h-80 lg:h-96 object-cover'
+          />
+          <img
+            src={faqImage2}
+            alt="faq-image-02"
+            className='section-image rounded-sm w-full sm:w-1/2 sm:h-64 lg:h-80 object-cover'
+          />
         </div>
 
-        <div className='content w-full lg:w-1/2'>
+        <div className='store-content w-full lg:w-1/2'>
           <span className="title-span">Modern Solutions</span>
 
           <h2 className="heading-1 mb-5">
@@ -259,7 +359,7 @@ const Services = () => {
             designs
           </h2>
 
-          <p className="pera-text">
+          <p className="pera-text mb-8">
             We create spaces that are not only beautiful but also functional and comfortable. Our team of experienced designers works closely with clients to understand their needs and preferences, and we create spaces that are tailored to their specific requirements.
           </p>
 
@@ -271,51 +371,51 @@ const Services = () => {
         </div>
       </div>
 
-      <div ref={featureRef} className='container py-[8%] mx-auto px-4'>
-        <div className='feature-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 text-center'>
-          <div className='group'>
-            <img
-              src={feature1}
-              alt="feature-icon"
-              className='mx-auto mb-8'
-            />
-
-            <h3 className='text-xl lg:text-2xl font-semibold mb-3'>Worldwide shipping</h3>
-
-            <p className='text-gray-600 mb-6 max-w-xs mx-auto text-sm'>
-              We offer free shipping on all orders over $100.
-            </p>
+      {/* Features Section */}
+      <div ref={featureRef} className='bg-light-yellow py-[8%]'>
+        <div className='container mx-auto px-4'>
+          {/* Encabezado de la sección */}
+          <div className='feature-heading text-center mb-16'>
+            <span className='title-span'>Why choose us</span>
+            <h2 className='heading-1'>
+              The <span className='text-coffee'>Lumor</span> difference
+            </h2>
           </div>
 
-          <div className='group'>
-            <img
-              src={feature2}
-              alt="feature-icon"
-              className='mx-auto mb-8'
-            />
+          <div className='feature-grid grid grid-cols-1 md:grid-cols-3 gap-8'>
+            <div className='bg-white rounded-sm p-8 text-center shadow-sm hover:shadow-md transition-shadow duration-300'>
+              <div className='feature-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-light-yellow mb-6 mx-auto'>
+                <img src={feature1} alt="Worldwide shipping" className='w-10 h-10 object-contain' />
+              </div>
+              <h3 className='text-xl lg:text-2xl font-semibold mb-3'>Worldwide shipping</h3>
+              <div className='w-10 h-0.5 bg-coffee mx-auto mb-4' />
+              <p className='text-gray-500 text-sm leading-relaxed'>
+                We offer free shipping on all orders over $100, delivered right to your door anywhere in the world.
+              </p>
+            </div>
 
-            <h3 className='text-xl lg:text-2xl font-semibold mb-3'>Buyer protection</h3>
+            <div className='bg-white rounded-sm p-8 text-center shadow-sm hover:shadow-md transition-shadow duration-300'>
+              <div className='feature-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-light-yellow mb-6 mx-auto'>
+                <img src={feature2} alt="Buyer protection" className='w-10 h-10 object-contain' />
+              </div>
+              <h3 className='text-xl lg:text-2xl font-semibold mb-3'>Buyer protection</h3>
+              <div className='w-10 h-0.5 bg-coffee mx-auto mb-4' />
+              <p className='text-gray-500 text-sm leading-relaxed'>
+                Every transaction is secured and verified by Stripe, giving you complete peace of mind.
+              </p>
+            </div>
 
-            <p className='text-gray-600 mb-6 max-w-xs mx-auto text-sm'>
-              Transactions verified by Stripe
-            </p>
+            <div className='bg-white rounded-sm p-8 text-center shadow-sm hover:shadow-md transition-shadow duration-300'>
+              <div className='feature-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-light-yellow mb-6 mx-auto'>
+                <img src={feature3} alt="Customer support" className='w-10 h-10 object-contain' />
+              </div>
+              <h3 className='text-xl lg:text-2xl font-semibold mb-3'>Customer support</h3>
+              <div className='w-10 h-0.5 bg-coffee mx-auto mb-4' />
+              <p className='text-gray-500 text-sm leading-relaxed'>
+                Our dedicated team is available 24/7 to assist you with any questions or concerns.
+              </p>
+            </div>
           </div>
-
-          <div className='group'>
-            <img
-              src={feature2}
-              alt="feature-icon"
-              className='mx-auto mb-8'
-            />
-
-            <h3 className='text-xl lg:text-2xl font-semibold mb-3'>Customer support</h3>
-
-            <p className='text-gray-600 mb-6 max-w-xs mx-auto text-sm'>
-              24/7 Customer Support
-            </p>
-          </div>
-
-
         </div>
       </div>
     </>
