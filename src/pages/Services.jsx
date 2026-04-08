@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react"
 import { PhoneCall, ArrowRight } from 'lucide-react';
 import MainBtn from '../components/ui/Buttons/MainBtn';
 import services from '../assets/Data/Services.json'
+import ServiceCard from '../components/ui/Cards/ServiceCard';
 
 
 const aboutImg1 = "/images/AboutPage/about-image-01.jpg"
@@ -19,6 +20,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Services = () => {
 
+  const aboutRef = useRef();
   const serviceRef = useRef();
 
   useEffect(() => {
@@ -54,6 +56,38 @@ const Services = () => {
           toggleActions: "play none none reverse"
         }
       });
+    }, aboutRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".content-animate > *", {
+        y: 30,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".content-animate",
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      gsap.from(".service-grid > *", {
+        y: 50,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".service-grid",
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
     }, serviceRef);
 
     return () => ctx.revert();
@@ -63,7 +97,7 @@ const Services = () => {
     <>
       <PageBanner title="Our Services" currentPage="Our Services" />
 
-      <div ref={serviceRef} className="container mx-auto py-[8%] px-4 gap-14 section-container items-center!">
+      <div ref={aboutRef} className="container mx-auto py-[8%] px-4 gap-14 section-container items-center!">
         <div className="animate-images rounded-sm w-full lg:w-1/2 relative">
           <img src={aboutImg1} alt="about-image-01" className="rounded-sm w-full lg:w-auto" />
           <img src={aboutImg2} alt="about-image-02" className="absolute hidden md:block right-4 -bottom-10 md:-bottom-12 lg:-bottom-16 xl:-bottom-20 w-40 md:w-52 lg:w-64 xl:w-90 rounded-sm shadow-lg" />
@@ -114,8 +148,21 @@ const Services = () => {
         </div>
       </div>
 
-      <div>
+      <div ref={serviceRef} className='container py-[8%] mx-auto px-4 gap-10 lg:gap-14'>
+        <div className='text-center w-full mb-10 content-animate'>
+          <span className='title-span'>Premium services</span>
 
+          <h2 className='heading-1 mb-5'>
+            <span className='text-coffee'>Our services make your </span> <br />
+            life comfortable
+          </h2>
+        </div>
+
+        <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 service-grid'>
+          {services.map((service, index) => (
+            <ServiceCard key={service.id || index} {...service} />
+          ))}
+        </div>
       </div>
     </>
   )
