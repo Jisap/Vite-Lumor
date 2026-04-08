@@ -6,6 +6,7 @@ import { PhoneCall, ArrowRight } from 'lucide-react';
 import MainBtn from '../components/ui/Buttons/MainBtn';
 import services from '../assets/Data/Services.json'
 import ServiceCard from '../components/ui/Cards/ServiceCard';
+import Testimonials from '../components/ui/Testimonials';
 
 
 const aboutImg1 = "/images/AboutPage/about-image-01.jpg"
@@ -26,6 +27,7 @@ const Services = () => {
   const ctaRef = useRef();
   const storeRef = useRef();
   const featureRef = useRef();
+  const testimonialRef = useRef();
 
   // --- Sección About / Intro ---
   useEffect(() => {
@@ -415,6 +417,23 @@ const Services = () => {
                 Our dedicated team is available 24/7 to assist you with any questions or concerns.
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div ref={testimonialRef} className='bg-light-yellow'>
+        <div className='container py-[8%] mx-auto px-4'>
+          <div className='text-center w-full mb-10 content'>
+            <span className='title-span'>Our Testimonials</span>
+
+            <h2 className='heading-1 mb-5'>
+              Feedback from
+              <span className='text-coffe'> clients</span>
+            </h2>
+          </div>
+
+          <div className='testimonials-wrapper'>
+            <Testimonials />
           </div>
         </div>
       </div>
