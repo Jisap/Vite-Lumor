@@ -12,6 +12,10 @@ const aboutImg1 = "/images/AboutPage/about-image-01.jpg"
 const aboutImg2 = "/images/AboutPage/about-image-02.jpg"
 const faqImage1 = "/images/Faqs/faq-image-01.jpg"
 const faqImage2 = "/images/Faqs/faq-image-02.jpg"
+const feature1 = "/images/Services/feature-01.png"
+const feature2 = "/images/Services/feature-02.png"
+const feature3 = "/images/Services/feature-03.png"
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -268,7 +272,51 @@ const Services = () => {
       </div>
 
       <div ref={featureRef} className='container py-[8%] mx-auto px-4'>
+        <div className='feature-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 text-center'>
+          <div className='group'>
+            <img
+              src={feature1}
+              alt="feature-icon"
+              className='mx-auto mb-8'
+            />
 
+            <h3 className='text-xl lg:text-2xl font-semibold mb-3'>Worldwide shipping</h3>
+
+            <p className='text-gray-600 mb-6 max-w-xs mx-auto text-sm'>
+              We offer free shipping on all orders over $100.
+            </p>
+          </div>
+
+          <div className='group'>
+            <img
+              src={feature2}
+              alt="feature-icon"
+              className='mx-auto mb-8'
+            />
+
+            <h3 className='text-xl lg:text-2xl font-semibold mb-3'>Buyer protection</h3>
+
+            <p className='text-gray-600 mb-6 max-w-xs mx-auto text-sm'>
+              Transactions verified by Stripe
+            </p>
+          </div>
+
+          <div className='group'>
+            <img
+              src={feature2}
+              alt="feature-icon"
+              className='mx-auto mb-8'
+            />
+
+            <h3 className='text-xl lg:text-2xl font-semibold mb-3'>Customer support</h3>
+
+            <p className='text-gray-600 mb-6 max-w-xs mx-auto text-sm'>
+              24/7 Customer Support
+            </p>
+          </div>
+
+
+        </div>
       </div>
     </>
   )
