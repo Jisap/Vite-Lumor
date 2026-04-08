@@ -20,6 +20,7 @@ import GalleryDetails from './pages/GalleryDetails'
 import Shop from './pages/Shop'
 import Blogs from './pages/Blogs'
 import Contact from './pages/Contact'
+import Services from './pages/Services'
 
 
 
@@ -73,6 +74,7 @@ const App = () => {
               <Route path='/shop' element={<Shop />} />
               <Route path='/blogs' element={<Blogs />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/services" element={<Services />} />
             </Routes>
           </div>
           <Footer />
