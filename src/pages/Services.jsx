@@ -10,11 +10,6 @@ import ServiceCard from '../components/ui/Cards/ServiceCard';
 
 const aboutImg1 = "/images/AboutPage/about-image-01.jpg"
 const aboutImg2 = "/images/AboutPage/about-image-02.jpg"
-const faqImage1 = "../../public/images/Faqs/faq-image-01.jpg"
-const faqImage2 = "../../public/images/Faqs/faq-image-02.jpg"
-const feature1 = "../../public/images/Services/feature-01.png"
-const feature2 = "../../public/images/Services/feature-02.png"
-const feature3 = "../../public/images/Services/feature-03.png"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,7 +17,9 @@ const Services = () => {
 
   const aboutRef = useRef();
   const serviceRef = useRef();
+  const ctaRef = useRef();
 
+  // --- Sección About / Intro ---
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".animate-banner", {
@@ -61,6 +58,7 @@ const Services = () => {
     return () => ctx.revert();
   }, []);
 
+  // --- Sección Service Grid ---
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".content-animate > *", {
@@ -89,6 +87,54 @@ const Services = () => {
         }
       });
     }, serviceRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // --- Sección CTA ---
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const q = gsap.utils.selector(ctaRef);
+
+      // Texto del CTA desde la izquierda
+      gsap.from(q(".cta-heading"), {
+        x: -50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Botón desde la derecha
+      gsap.from(q(".cta-btn"), {
+        x: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Línea decorativa que se expande
+      gsap.from(q(".cta-line"), {
+        scaleX: 0,
+        transformOrigin: "left center",
+        duration: 1.2,
+        ease: "power3.inOut",
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }, ctaRef);
 
     return () => ctx.revert();
   }, []);
@@ -165,7 +211,31 @@ const Services = () => {
         </div>
       </div>
 
+      {/* CTA Section */}
+      <div ref={ctaRef} className='bg-primary text-white overflow-hidden'>
+        <div className='container py-[5%] mx-auto px-4'>
+          {/* Línea decorativa superior */}
+          <div className='cta-line h-px bg-white/20 mb-10 w-full' />
 
+          <div className='flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16'>
+            <h2 className='cta-heading text-2xl sm:text-3xl lg:text-4xl max-w-2xl font-medium leading-snug'>
+              Schedule an appointment to meet or{' '}
+              <span className='text-coffee'>email us</span> your questions
+            </h2>
+
+            <div className='cta-btn flex-shrink-0'>
+              <MainBtn
+                path="/contact"
+                text="Contact Us"
+                className="bg-white! text-primary! hover:bg-coffee! hover:text-white! min-w-[160px]"
+              />
+            </div>
+          </div>
+
+          {/* Línea decorativa inferior */}
+          <div className='cta-line h-px bg-white/20 mt-10 w-full' />
+        </div>
+      </div>
     </>
   )
 }
