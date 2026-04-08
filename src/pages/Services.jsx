@@ -217,7 +217,7 @@ const Services = () => {
           {/* Línea decorativa superior */}
           <div className='cta-line h-px bg-white/20 mb-10 w-full' />
 
-          <div className='flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16'>
+          <div className='flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-16'>
             <h2 className='cta-heading text-2xl sm:text-3xl lg:text-4xl max-w-2xl font-medium leading-snug'>
               Schedule an appointment to meet or{' '}
               <span className='text-coffee'>email us</span> your questions
