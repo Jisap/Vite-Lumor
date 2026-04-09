@@ -22,6 +22,7 @@ import Blogs from './pages/Blogs'
 import Contact from './pages/Contact'
 import Services from './pages/Services'
 import ServiceDetail from './pages/ServiceDetail'
+import Team from './pages/Team'
 
 
 
@@ -77,6 +78,7 @@ const App = () => {
               <Route path="/contact" element={<Contact />} />
               <Route path="/services" element={<Services />} />
               <Route path="/service/:id" element={<ServiceDetail />} />
+              <Route path="/team" element={<Team />} />
             </Routes>
           </div>
           <Footer />
