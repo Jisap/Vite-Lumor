@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "question": "What interior design services do you offer?",
+    "answer": "We offer a comprehensive range of interior design services including residential styling, commercial space planning, custom furniture design, and complete renovations. Our team works closely with you to transform any space into a reflection of your vision."
+  },
+  {
+    "id": 2,
+    "question": "How long does a typical design project take?",
+    "answer": "Project timelines vary depending on the scope and complexity. A single room redesign might take 4-6 weeks, while a full home renovation could take several months. We always establish clear timelines during our initial consultation."
+  },
+  {
+    "id": 3,
+    "question": "What is your pricing structure?",
+    "answer": "Our pricing is tailored to the specific needs of each project. We offer fixed-fee packages for well-defined scopes and hourly rates for consultation-only services. Detailed estimates are provided after the initial discovery meeting."
+  },
+  {
+    "id": 4,
+    "question": "Do you work with contractors and architects?",
+    "answer": "Yes! We have an extensive network of trusted contractors, artisans, and architects we collaborate with regularly. However, we are also perfectly comfortable working with professionals you have already hired."
+  },
+  {
+    "id": 5,
+    "question": "Can you handle projects remotely or online?",
+    "answer": "Absolutely. We offer exceptional e-design services anywhere in the world. This includes virtual consultations, 3D renderings, and detailed shopping lists so you can implement the design at your own pace."
+  }
+]
