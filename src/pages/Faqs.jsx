@@ -5,6 +5,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import FAQItem from '../components/ui/FAQItem'
 import faqData from '../assets/Data/FaqData.json'
 import MainBtn from '../components/ui/Buttons/MainBtn'
+import work from "../assets/Data/Work.json"
+import WorkCard from '../components/ui/Cards/WorkCard'
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -96,6 +99,43 @@ const Faqs = () => {
     return () => ctx.revert();
   }, []);
 
+  // --- Animación bloque inferior (workRef) ---
+  useEffect(() => {
+    if (!workRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Títulos
+      gsap.from(".content > *", {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".content",
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // 2. Tarjetas de trabajo
+      gsap.from(".work-grid > *", {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".work-grid",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }, workRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
       <PageBanner
@@ -154,6 +194,28 @@ const Faqs = () => {
               className="bg-black! text-white!"
             />
           </div>
+        </div>
+      </div>
+
+      <div ref={workRef} className='works container mx-auto px-4 py-[8%]'>
+        <div className='w-full mb-10 content'>
+          <span className='title-span'>Our Work</span>
+          <h2 className='heading-1 mb-5'>
+            Every idea is
+            <span className='text-coffee'>Possible</span>
+          </h2>
+        </div>
+
+        <div className='grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 gap-10 work-grid'>
+          {work.map((item) => (
+            <WorkCard
+              key={item.id}
+              id={item.id}
+              image={item.image}
+              title={item.title}
+              number={item.number}
+            />
+          ))}
         </div>
       </div>
     </>
