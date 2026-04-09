@@ -1,7 +1,7 @@
 import PageBanner from '../components/ui/PageBanner'
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { useEffect, useRef, useState, useMemo } from "react"
+import { useEffect, useRef, useMemo } from "react"
 import TeamData from "../assets/Data/TeamData.json"
 import TeamCard from '../components/ui/Cards/TeamCard'
 
@@ -10,17 +10,10 @@ gsap.registerPlugin(ScrollTrigger);
 const Team = () => {
   const introRef = useRef();
   const teamRef = useRef();
-  const [activeFilter, setActiveFilter] = useState("all");
 
   const categories = useMemo(() => (
     [...new Set(TeamData.map(t => t.category))]
   ), []);
-
-  const filtered = useMemo(() => (
-    activeFilter === "all"
-      ? TeamData
-      : TeamData.filter(t => t.category === activeFilter)
-  ), [activeFilter]);
 
   // Animación sección intro
   useEffect(() => {
@@ -55,24 +48,11 @@ const Team = () => {
     return () => ctx.revert();
   }, []);
 
-  // Animación cards del equipo
+  // Animación cards
   useEffect(() => {
     if (!teamRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(".team-filters > *", {
-        y: 20,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: teamRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
-      });
-
       const cards = teamRef.current.querySelectorAll(".team-card");
       gsap.from(cards, {
         y: 50,
@@ -89,7 +69,7 @@ const Team = () => {
     }, teamRef);
 
     return () => ctx.revert();
-  }, [filtered]);
+  }, []);
 
   return (
     <>
@@ -111,12 +91,10 @@ const Team = () => {
               por transformar espacios en experiencias únicas e inolvidables.
             </p>
 
-            {/* Stats */}
-            <div className="team-stats flex justify-center gap-12 mt-4 mb-0">
+            <div className="team-stats flex justify-center gap-12 mt-4">
               <div className="team-stat text-center">
                 <p className="text-4xl lg:text-5xl font-semibold text-heading">
-                  {TeamData.length}
-                  <span className="text-coffee">+</span>
+                  {TeamData.length}<span className="text-coffee">+</span>
                 </p>
                 <p className="text-sm uppercase tracking-widest text-muted mt-1">
                   Miembros
@@ -127,8 +105,7 @@ const Team = () => {
 
               <div className="team-stat text-center">
                 <p className="text-4xl lg:text-5xl font-semibold text-heading">
-                  {categories.length}
-                  <span className="text-coffee">+</span>
+                  {categories.length}<span className="text-coffee">+</span>
                 </p>
                 <p className="text-sm uppercase tracking-widest text-muted mt-1">
                   Especialidades
@@ -150,41 +127,10 @@ const Team = () => {
         </div>
       </div>
 
-      {/* Grid del equipo con filtros */}
-      <div ref={teamRef} className="container pt-[4%] pb-[8%] mx-auto px-4">
-
-        {/* Filtros */}
-        {categories.length > 1 && (
-          <div className="team-filters flex flex-wrap gap-3 justify-center mb-14">
-            <button
-              onClick={() => setActiveFilter("all")}
-              className={`px-5 py-2 text-sm uppercase tracking-wider border transition-all duration-300
-                ${activeFilter === "all"
-                  ? "bg-primary text-white border-primary"
-                  : "bg-transparent text-heading border-gray-300 hover:border-coffee hover:text-coffee"
-                }`}
-            >
-              Todos
-            </button>
-
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setActiveFilter(cat)}
-                className={`px-5 py-2 text-sm uppercase tracking-wider border transition-all duration-300
-                  ${activeFilter === cat
-                    ? "bg-primary text-white border-primary"
-                    : "bg-transparent text-heading border-gray-300 hover:border-coffee hover:text-coffee"
-                  }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        )}
-
+      {/* Grid del equipo */}
+      <div ref={teamRef} className="container py-[8%] mx-auto px-4">
         <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-10">
-          {filtered.map(team => (
+          {TeamData.map(team => (
             <TeamCard key={team.id} {...team} />
           ))}
         </div>
