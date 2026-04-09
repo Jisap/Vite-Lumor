@@ -151,7 +151,7 @@ const Team = () => {
       </div>
 
       {/* Grid del equipo con filtros */}
-      <div ref={teamRef} className="container py-[8%] mx-auto px-4">
+      <div ref={teamRef} className="container pt-[4%] pb-[8%] mx-auto px-4">
 
         {/* Filtros */}
         {categories.length > 1 && (
