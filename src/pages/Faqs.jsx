@@ -1,10 +1,12 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import PageBanner from '../components/ui/PageBanner'
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import FAQItem from '../components/ui/FAQItem'
 import faqData from '../assets/Data/FaqData.json'
+import MainBtn from '../components/ui/Buttons/MainBtn'
 
+gsap.registerPlugin(ScrollTrigger);
 
 const faqImage1 = "/images/Faqs/faq-image-01.jpg"
 const faqImage2 = "/images/Faqs/faq-image-02.jpg"
@@ -19,6 +21,80 @@ const Faqs = () => {
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   }
+
+  // --- Animaciones GSAP ---
+  useEffect(() => {
+    if (!faqRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Imágenes de la izquierda 
+      gsap.from(".faq-image img", {
+        x: -50,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.2, // escalonado
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: faqRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // 2. Títulos
+      gsap.from(".faq-heading > *", {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".faq-heading",
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // 3. Contenedor de items de las FAQs
+      gsap.from(".faq-container > div", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".faq-container",
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+    }, faqRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // --- Animación bloque inferior (headingRef) ---
+  useEffect(() => {
+    if (!headingRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(".content-animate > *", {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }, headingRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <>
@@ -42,14 +118,14 @@ const Faqs = () => {
         </div>
 
         <div className='faq-content w-full lg:w-1/2'>
-          <div className="mb-8">
+          <div className="mb-8 faq-heading">
             <span className="title-span">Respuestas Rápidas</span>
             <h2 className="heading-1">
               Preguntas <span className="text-coffee">Frecuentes</span>
             </h2>
           </div>
-          
-          <div className="flex flex-col gap-2">
+
+          <div className="flex flex-col gap-2 faq-container">
             {faqData.map((faq, index) => (
               <FAQItem
                 key={faq.id}
@@ -59,6 +135,24 @@ const Faqs = () => {
                 onClick={() => toggleFAQ(index)}
               />
             ))}
+          </div>
+        </div>
+      </div>
+
+      <div ref={headingRef} className='bg-light-yellow py-[8%]'>
+        <div className='container mx-auto px-4 section-container'>
+          <div className='text-center w-full content-animate'>
+            <span className='title-span'>Design studio</span>
+
+            <h2 className='heading-1 mb-5'>
+              <span className='text-coffee'>Our services make your home </span> <br />
+              comfortable And cozy
+            </h2>
+
+            <MainBtn
+              text="Read More"
+              className="bg-black! text-white!"
+            />
           </div>
         </div>
       </div>
