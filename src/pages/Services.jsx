@@ -239,6 +239,40 @@ const Services = () => {
     return () => ctx.revert();
   }, []);
 
+  // --- Sección Testimonials ---
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const q = gsap.utils.selector(testimonialRef);
+
+      gsap.from(q(".testimonial-heading > *"), {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".testimonial-heading"),
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      gsap.from(q(".testimonials-wrapper"), {
+        y: 50,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: q(".testimonials-wrapper"),
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }, testimonialRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
       <PageBanner title="Our Services" currentPage="Our Services" />
@@ -421,14 +455,14 @@ const Services = () => {
         </div>
       </div>
 
-      <div ref={testimonialRef} className='bg-light-yellow'>
+      <div ref={testimonialRef} className='bg-light-yellow relative'>
         <div className='container py-[8%] mx-auto px-4'>
-          <div className='text-center w-full mb-10 content'>
+          <div className='text-center w-full mb-12 testimonial-heading'>
             <span className='title-span'>Our Testimonials</span>
 
             <h2 className='heading-1 mb-5'>
               Feedback from
-              <span className='text-coffe'> clients</span>
+              <span className='text-coffee'> clients</span>
             </h2>
           </div>
 
