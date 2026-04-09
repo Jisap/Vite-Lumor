@@ -24,6 +24,7 @@ import Services from './pages/Services'
 import ServiceDetail from './pages/ServiceDetail'
 import Team from './pages/Team'
 import Faqs from './pages/Faqs'
+import WorkDetails from './pages/WorkDetails'
 
 
 
@@ -81,6 +82,7 @@ const App = () => {
               <Route path="/service/:id" element={<ServiceDetail />} />
               <Route path="/team" element={<Team />} />
               <Route path="/faqs" element={<Faqs />} />
+              <Route path="/work/:id" element={<WorkDetails />} />
             </Routes>
           </div>
           <Footer />
