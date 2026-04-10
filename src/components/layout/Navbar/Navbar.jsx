@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Logo from './Logo'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import NavDrop from './NavDrop';
-import Navmenu from './Navmenu';
+import Navmenu from './NavMenu';
 import { ShoppingBag, TextAlignJustify, User } from 'lucide-react';
 import MobileMenu from './MobileMenu';
 import AuthModal from '../../ui/Modal/AuthModal';
