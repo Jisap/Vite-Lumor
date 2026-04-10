@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
-import TeamData from "../assets/data/TeamData.json"
+import TeamData from "../assets/Data/TeamData.json"
 import PageBanner from "../components/ui/PageBanner"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
