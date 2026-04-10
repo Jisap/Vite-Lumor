@@ -7,7 +7,7 @@ import { useCart } from '../hooks/useCart';
 import MainBtn from '../components/ui/Buttons/MainBtn';
 import { Link } from 'react-router-dom';
 
-import data from "../assets/Data";
+import data from "../assets/data";
 
 
 gsap.registerPlugin(ScrollTrigger);
